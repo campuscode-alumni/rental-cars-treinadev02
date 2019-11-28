@@ -1,0 +1,12 @@
+<%= link_to 'Registrar nova filial', new_subsidiary_path %>
+
+<ul>
+    <% @subsidiaries.each do |subsidiary| %>
+        <li> 
+            <%= link_to subsidiary.name, subsidiary_path(subsidiary.id) %>
+            <%= subsidiary.cnpj %>
+            <%= subsidiary.address %>
+        </li>
+    <% end %>
+</ul>
+
