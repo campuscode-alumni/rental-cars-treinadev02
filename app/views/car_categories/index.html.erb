@@ -1,0 +1,12 @@
+<%= link_to 'Registrar nova categoria', new_car_category_path %>
+
+<ul>
+    <% @car_categories.each do |category| %>
+        <li>
+            <%= link_to category.name, car_category_path(category.id) %>
+            <%= category.daily_rate %>
+            <%= category.car_insurance %>
+            <%= category.third_party_insurance %>
+        </li>
+    <% end %>
+</li>

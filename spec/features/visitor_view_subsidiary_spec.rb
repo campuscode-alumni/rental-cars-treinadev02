@@ -10,6 +10,9 @@ feature 'Visitor view subsidiaries' do
     click_on 'RentalCars PE'
 
     expect(page).to have_content('RentalCars PE')
+    expect(page).to have_content('77.286.360/0001-26')
+    expect(page).to have_content('Rua Severino Juliano da Silva, 123')
+
     expect(page).to have_link('Voltar')
   end
 
