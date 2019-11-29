@@ -1,0 +1,7 @@
+<h3>Filiais</h3>
+<% @subsidiaries.each do |subsidiary| %>
+  <%= link_to subsidiary.name, subsidiary %>
+<% end %>
+<% if @subsidiaries.empty? %>
+  <p>Não existem filiais cadastradas no sistema.</p>
+<% end %>

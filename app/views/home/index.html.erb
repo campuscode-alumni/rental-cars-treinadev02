@@ -1,0 +1,10 @@
+<h1>Rental Cars</h1>
+<h2>Bem vindo ao sistema de gestão de locação</h2>
+<ul>
+  <p><%= link_to 'Fabricantes', manufacturers_path %></p>
+  <% @manufacturers.each do |manufacturer| %>
+    <%= link_to manufacturer.name %>
+  <% end %>
+  <p><%= link_to 'Registrar novo fabricante', new_manufacturer_path %></p>
+  <p><%= link_to 'Filiais', subsidiaries_path %></p>
+</ul>

@@ -1,0 +1,11 @@
+<%= form_with scope: :manufacturer, url: manufacturers_path, local: true do |form| %>
+  <p>
+    <%= form.label :name, 'Nome' %><br>
+    <%= form.text_field :name %>
+  </p>
+  <p>
+    <%= form.submit 'Enviar' %>
+  </p>
+<% end %>
+
+<%= link_to 'Voltar', manufacturers_path %>
