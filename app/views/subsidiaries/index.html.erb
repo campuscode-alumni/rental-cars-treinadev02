@@ -1,9 +1,13 @@
 <%= link_to 'Registrar nova filial', new_subsidiary_path %>
 
+<% if @subsidiaries.empty? %>
+    <p> Não possui filiais cadastradas.</p>
+<% end %> 
+
 <ul>
     <% @subsidiaries.each do |subsidiary| %>
         <li> 
-            <%= link_to subsidiary.name, subsidiary_path(subsidiary.id) %>
+            <%= link_to subsidiary.name, subsidiary %>
             <%= subsidiary.cnpj %>
             <%= subsidiary.address %>
         </li>
