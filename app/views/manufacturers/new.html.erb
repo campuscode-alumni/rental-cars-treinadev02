@@ -1,0 +1,11 @@
+<h1>Registrar nova fabricante</h1>
+
+<%= form_with model: @manufacturer, local: true do |f| %>
+  <p>
+    <%= f.label :name, 'Nome' %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.submit 'Enviar' %>
+  </p>
+<% end %>
