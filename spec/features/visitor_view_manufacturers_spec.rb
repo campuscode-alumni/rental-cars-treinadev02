@@ -24,4 +24,12 @@ feature 'Visitor view manufacturers' do
 
     expect(current_path).to eq root_path
   end
+
+  scenario 'and no-register manufacturers' do
+    visit root_path
+    click_on 'Fabricantes'
+    
+    expect(page).to have_content('Não possui fabricantes cadastradas.')
+  end
+
 end

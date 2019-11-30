@@ -16,13 +16,4 @@ feature 'Admin register subsidiary' do
     expect(page).to have_content('Av. Paulista, 1527')
   end
 
-  feature 'Admin no-register subsidiary' do
-    scenario 'successfully' do
-      visit root_path
-      click_on 'Filiais'
-      
-      expect(page).to have_content('Não possui filiais cadastradas.')
-    end
-  
-
 end

@@ -2,6 +2,11 @@
 
 <%= link_to 'Registrar novo fabricante', new_manufacturer_path %>
 
+<% if @manufacturers.empty? %>
+    <p> Não possui fabricantes cadastradas.</p>
+<%end%>
+
+
 <ul>
     <% @manufacturers.each do |manufacturer| %>
         <li><%= link_to manufacturer.name, manufacturer %></li>
