@@ -1,0 +1,22 @@
+<div class="car-category-page">
+  <div>
+    <table style="width:100%; text-align:center">
+      <tr>
+        <th>Categorias de carro</th>
+      </tr>
+      <tr>
+        <td>
+          <% @car_categories.each do |car_category| %>
+            <%= car_category.name %>
+            <%= car_category.daily_rate %>
+            <%= car_category.car_insurance %>
+            <%= car_category.third_party_insurance %>
+          <% end %>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div>
+    <%= link_to 'Voltar', root_path %>
+  </div>
+</div>
