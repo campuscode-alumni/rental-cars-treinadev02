@@ -1,0 +1,5 @@
+<%= form_with model: @manufacturer, local: true do |form| %>
+    <%= form.label :name, 'Nome'%>
+    <%= form.text_field :name%>
+    <%= form.submit 'Enviar' %>
+<% end %> 

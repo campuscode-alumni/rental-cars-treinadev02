@@ -12,8 +12,21 @@ class ManufacturersController < ApplicationController
         @manufacturer = Manufacturer.new
     end
 
+    def edit
+        @manufacturer = Manufacturer.find(params[:id])
+    end
+
+    def update
+        @manufacturer = Manufacturer.find(params[:id])
+        if @manufacturer.update(manufacturers_params)
+            redirect_to @manufacturer
+        else
+            render :new
+        end
+    end
+
     def create 
-        manufacturer = Manufacturer.new(get_params)
+        manufacturer = Manufacturer.new(manufacturers_params)
 
         if manufacturer.save
             redirect_to manufacturer
@@ -23,7 +36,7 @@ class ManufacturersController < ApplicationController
     end
 
     private 
-    def get_params
+    def manufacturers_params
         params.require(:manufacturer).permit(:name)
     end
 
