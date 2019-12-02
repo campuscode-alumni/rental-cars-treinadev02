@@ -1,6 +1,7 @@
-<h1>Registrar nova fabricante</h1>
+<h1>Atualizar fabricante</h1>
 
 <% if @manufacturer.errors.any? %>
+  <p>Você deve corrigir os seguintes erros:</p>
   <ul>
   <% @manufacturer.errors.full_messages.each do |message| %>
     <li><%= message %></li>
