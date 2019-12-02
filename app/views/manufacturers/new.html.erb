@@ -1,14 +1,6 @@
 <div style="margin-left: 200px">
-  <h1 style="text-align:center; color: blue">Registrar nova fabricante</h1>
-  <%= form_with model: @manufacturer, url: manufacturers_path, local: true do |form| %>
-    <p>
-      <%= form.label :name, 'Nome' %><br>
-      <%= form.text_field :name %>
-    </p>
-    <p>
-      <%= form.submit 'Enviar' %>
-    </p>
-  <% end %>
+  <h1 style="text-align:center">Registrar nova fabricante</h1>
+  <%= render 'form' %>
 
   <%= link_to 'Voltar', manufacturers_path %>
 

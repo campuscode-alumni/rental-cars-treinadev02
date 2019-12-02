@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'Visitor view manufacturers' do
   scenario 'successfully' do
     #Arrange
-    Manufacturer.create(name: 'Fiat')
+    Manufacturer.new(name: 'Fiat').save
     Manufacturer.create(name: 'Volkswagen')
     #Act
     visit root_path
@@ -23,6 +23,6 @@ feature 'Visitor view manufacturers' do
     click_on 'Fiat'
     click_on 'Voltar'
 
-    expect(current_path).to eq root_path
+    expect(current_path).to eq manufacturers_path
   end
 end

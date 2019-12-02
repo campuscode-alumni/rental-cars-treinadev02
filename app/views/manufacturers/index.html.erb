@@ -8,7 +8,7 @@
       <tr>
         <td>
           <% @manufacturers.each do |manufacturer| %>
-            <%= link_to manufacturer.name %>
+            <%= link_to manufacturer.name, manufacturer %>
           <% end %>
         </td>
       </tr>
