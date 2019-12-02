@@ -1,0 +1,18 @@
+<div class="page-show">
+  <div>
+    <table style="width:100%; text-align:center">
+      <tr>
+        <th>Categorias de carro</th>
+      </tr>
+      <tr>
+        <td><%= @car_categories.name %></td>
+        <td><%= @car_categories.daily_rate %></td>
+        <td><%= @car_categories.car_insurance %></td>
+        <td><%= @car_categories.third_party_insurance %></td>
+      </tr>
+    </table>
+  </div>
+  <div class="pt-5">
+    <%= link_to 'Voltar', car_categories_path %>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div style="margin-left: 200px">
+  <h1 style="text-align:center; color: blue">Registrar nova categoria</h1>
+  <%= form_with model: @car_categories, url: car_categories_path, local: true do |form| %>
+    <p>
+      <%= form.label :name, 'Nome' %><br>
+      <%= form.text_field :name %>
+    </p>
+    <p>
+      <%= form.label :daily_rate, 'Diária' %><br>
+      <%= form.text_field :daily_rate %>
+    </p>
+    <p>
+      <%= form.label :car_insurance, 'Seguro do carro' %><br>
+      <%= form.text_field :car_insurance %>
+    </p>
+    <p>
+      <%= form.label :third_party_insurance, 'Seguradora de terceiros' %><br>
+      <%= form.text_field :third_party_insurance %>
+    </p>
+    <p>
+      <%= form.submit 'Enviar' %>
+    </p>
+  <% end %>
+
+  <%= link_to 'Voltar', car_categories_path %>
+
+</div>
