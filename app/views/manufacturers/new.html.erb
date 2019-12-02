@@ -1,5 +1,11 @@
 <h1> Registro de fabricante </h1>
 
+<% if @manufacturer.errors.any? %>
+  <% @manufacturer.errors.full_messages.each do |message| %>
+    <p><%= message %></p>
+  <% end %>
+<% end %>
+
 <%= form_with model: @manufacturer, local: true do |form| %>
     <%= form.label :name, 'Nome'%>
     <%= form.text_field :name %>
