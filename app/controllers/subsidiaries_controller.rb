@@ -4,20 +4,35 @@ class SubsidiariesController < ApplicationController
   end
 
   def show
-    @subsidiaries = Subsidiary.find(params[:id])
+    @subsidiary = Subsidiary.find(params[:id])
   end
 
   def new
-    @subsidiaries = Subsidiary.new
+    @subsidiary = Subsidiary.new
+  end
+
+  def edit
+    @subsidiary = Subsidiary.find(params[:id])
   end
 
   def create
-    @subsidiaries = Subsidiary.create(subsidiary_params)
+    @subsidiary = Subsidiary.create(subsidiary_params)
 
-    if @subsidiaries.save
-      redirect_to @subsidiaries
+    if @subsidiary.save
+      redirect_to @subsidiary
     else
+      flash.now[:alert] = 'Você deve preencher todos os campos'
       render 'new'
+    end
+  end
+
+  def update
+    @subsidiary = Subsidiary.find(params[:id])
+    if @subsidiary.update(subsidiary_params)
+      flash[:notice] = 'Filial atualizada com sucesso'
+      redirect_to @subsidiary
+    else
+      render :edit
     end
   end
 

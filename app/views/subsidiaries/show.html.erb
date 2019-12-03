@@ -1,6 +1,11 @@
-<%= @subsidiaries.name %>
-<p>CNPJ: <%= @subsidiaries.cnpj %></p>
-<p>CNPJ: <%= @subsidiaries.address %></p>
+<%= @subsidiary.name %>
+<p>CNPJ: <%= @subsidiary.cnpj %></p>
+<p>CNPJ: <%= @subsidiary.address %></p>
 <div class="pt-5">
-  <%= link_to 'Voltar', subsidiaries_path %>
+  <p>
+    <%= link_to 'Editar', edit_subsidiary_path(@subsidiary) %>
+  </p>
+  <p>
+    <%= link_to 'Voltar', subsidiaries_path %>
+  </p>
 </div>
