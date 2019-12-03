@@ -24,7 +24,7 @@ feature 'Admin edits manufacturer' do
     fill_in 'Nome', with: ''
     click_on 'Enviar'
     
-    expect(page).to have_content('Todos os campos devem ser preenchidos')
+    expect(page).to have_content('O campo deve ser preenchido')
   end
 
   scenario 'and must be unique' do

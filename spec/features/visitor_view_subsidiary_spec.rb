@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Visitor view subsidiaries' do
   scenario 'successfully' do
-    Subsidiary.create(name: 'RentalCars PE', cnpj: '77.286.360/0001-26' ,
+    Subsidiary.create!(name: 'RentalCars PE', cnpj: '77.286.360/0001-26' ,
                       address: 'Rua Severino Juliano da Silva, 123')
 
     visit root_path
@@ -15,7 +15,7 @@ feature 'Visitor view subsidiaries' do
   end
 
   scenario 'and go back to the root' do
-    Subsidiary.create(name: 'RentalCars PE', cnpj: '77.286.360/0001-26' ,
+    Subsidiary.create!(name: 'RentalCars PE', cnpj: '77.286.360/0001-26' ,
                       address: 'Rua Severino Juliano da Silva, 123')
 
     visit root_path
@@ -27,11 +27,11 @@ feature 'Visitor view subsidiaries' do
   end
 
   scenario 'and check a list of subsidiary' do
-    Subsidiary.create(name: 'RentalCars PE', cnpj: '77.286.360/0001-26' ,
+    Subsidiary.create!(name: 'RentalCars PE', cnpj: '77.286.360/0001-26' ,
                       address: 'Rua Severino Juliano da Silva, 123')
-    Subsidiary.create(name: 'RentalCars BA', cnpj: '82.272.928/0001-90' , 
+    Subsidiary.create!(name: 'RentalCars BA', cnpj: '82.272.928/0001-90' , 
                       address: 'Praça Manoel Vitorino, 168')
-    Subsidiary.create(name: 'RentalCars SP', cnpj: '75.856.882/0001-90' , 
+    Subsidiary.create!(name: 'RentalCars SP', cnpj: '75.856.882/0001-90' , 
                       address: 'Av. Paulista, 1000')
 
     visit root_path

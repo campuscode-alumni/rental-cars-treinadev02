@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Admin edit subsidiary' do
     scenario 'successfully' do 
-        Subsidiary.create(name: 'Filial SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
+        Subsidiary.create!(name: 'Filial SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
 
         visit root_path
         click_on 'Filiais'
@@ -17,5 +17,6 @@ feature 'Admin edit subsidiary' do
         expect(page). to have_content('Filial unidade pompeia')
         expect(page). to have_content('83.753.999/0001-77')
         expect(page). to have_content('Av. Pompeia, 500')
+        expect(page). to have_content('Filial alterada com sucesso')
     end 
 end

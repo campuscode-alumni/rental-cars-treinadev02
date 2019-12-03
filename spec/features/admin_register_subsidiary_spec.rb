@@ -14,6 +14,7 @@ feature 'Admin register subsidiary' do
     expect(page).to have_content('Rental Card Filial')
     expect(page).to have_content('43.466.839/0001-22')
     expect(page).to have_content('Av. Paulista, 1527')
+    expect(page).to have_content('Filial criada com sucesso')
   end
 
 end

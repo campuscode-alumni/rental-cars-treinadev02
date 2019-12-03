@@ -1,11 +1,3 @@
-<%= form_with model:@car_category, local: true do |form| %> 
-    <%= form.label :name, 'Nome' %>
-    <%= form.text_field :name %>
-    <%= form.label :daily_rate, 'Diária' %>
-    <%= form.text_field :daily_rate %>
-    <%= form.label :car_insurance, 'Seguro' %>
-    <%= form.text_field :car_insurance %>
-    <%= form.label :third_party_insurance, 'Seguro de terceiros' %>
-    <%= form.text_field :third_party_insurance %>
-    <%= form.submit 'Enviar' %>
-<% end %>
+<h1> Altera Categoria de Carros</h1>
+
+<%= render partial: "form", locals: {car_category: @car_category} %>

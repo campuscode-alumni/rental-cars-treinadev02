@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Visitor view subsidiaries' do
   scenario 'successfully' do
-    CarCategory.create(name: 'Carro pequeno', daily_rate: '55' , car_insurance: '35', 
+    CarCategory.create!(name: 'Carro pequeno', daily_rate: '55' , car_insurance: '35', 
                        third_party_insurance: '28')
 
     visit root_path
@@ -16,11 +16,11 @@ feature 'Visitor view subsidiaries' do
   end
 
   scenario 'and check a list of car category' do
-    CarCategory.create(name: 'Carro pequeno', daily_rate: '55' , car_insurance: '35', 
+    CarCategory.create!(name: 'Carro pequeno', daily_rate: '55' , car_insurance: '35', 
                        third_party_insurance: '28')
-    CarCategory.create(name: 'Carro grande', daily_rate: '72' , car_insurance: '38', 
+    CarCategory.create!(name: 'Carro grande', daily_rate: '72' , car_insurance: '38', 
                        third_party_insurance: '30')
-    CarCategory.create(name: 'Minivan', daily_rate: '76' , car_insurance: '40', 
+    CarCategory.create!(name: 'Minivan', daily_rate: '76' , car_insurance: '40', 
                        third_party_insurance: '30')
 
     visit root_path
@@ -32,7 +32,7 @@ feature 'Visitor view subsidiaries' do
   end
 
   scenario 'and return to home page' do
-    CarCategory.create(name: 'Carro pequeno', daily_rate: '55' , car_insurance: '35', 
+    CarCategory.create!(name: 'Carro pequeno', daily_rate: '55' , car_insurance: '35', 
                        third_party_insurance: '28')
 
     visit root_path

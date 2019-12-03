@@ -1,17 +1,4 @@
-<%= form_with model:@subsidiary, local: true do |form| %>
-    <p>
-        <%= form.label :name, 'Nome'%>
-        <%= form.text_field :name %>
-    </p>
-    <p>
-        <%= form.label :cnpj, 'CNPJ'%>
-        <%= form.text_field :cnpj %>
-    </p>
-    <p>
-        <%= form.label :address, 'Endereço'%>
-        <%= form.text_field :address %>
-    </p>
-    <p>
-        <%= form.submit 'Enviar'%>
-    </p>
-<% end %>
+<h1>Cadastra Filial</h1>
+
+<%= render partial: "form", locals: {subsidiary: @subsidiary} %>
+    

@@ -10,15 +10,15 @@ feature 'Admin register manufacturer' do
     click_on 'Enviar'
 
     expect(page).to have_content('Fiat')
+    expect(page).to have_content('Fabricante cadastrado com sucesso')
   end
 
   scenario 'and must fill in all fiedls' do
     visit new_manufacturer_path
 
-    fill_in 'Nome', with: ''
     click_on 'Enviar'
     
-    expect(page).to have_content('Todos os campos devem ser preenchidos')
+    expect(page).to have_content('O campo deve ser preenchido')
   end
 
   scenario 'and must be unique' do

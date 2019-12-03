@@ -1,0 +1,34 @@
+<div>
+    <% if @car_category.errors.any? %>
+        <p>Você deve corrigir os seguintes erros:</p>
+        <ul>
+            <% @car_category.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+        </ul>
+    <% end %>
+</div>
+
+<div>
+    <%= form_with model:@car_category, local: true do |form| %> 
+        <p>
+            <%= form.label :name, 'Nome' %>
+            <%= form.text_field :name %>
+        </p>
+        <p>
+            <%= form.label :daily_rate, 'Diária' %>
+            <%= form.number_field :daily_rate %>
+        </p>
+        <p>
+            <%= form.label :car_insurance, 'Seguro' %>
+            <%= form.number_field :car_insurance %>
+        </p>
+        <p>
+            <%= form.label :third_party_insurance, 'Seguro de terceiros' %>
+            <%= form.number_field :third_party_insurance %>
+        </p>
+        <p>
+            <%= form.submit 'Enviar' %>
+        </p>
+    <% end %>
+</div>
