@@ -1,0 +1,32 @@
+<div style="margin-left: 200px">
+
+  <% if @client.errors.any? %>
+    <p>Você deve corrigir os seguintes erros:</p>
+    <ul>
+      <% @client.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= form_with model: @client, local: true do |form| %>
+    <p>
+      <%= form.label :name, 'Nome' %><br>
+      <%= form.text_field :name %>
+    </p>
+    <p>
+      <%= form.label :cpf, 'CPF' %><br>
+      <%= form.text_field :cpf %>
+    </p>
+    <p>
+      <%= form.label :email, 'Email' %><br>
+      <%= form.text_field :email %>
+    </p>
+    <p>
+      <%= form.submit 'Enviar' %>
+    </p>
+  <% end %>
+
+  <%= link_to 'Voltar', clients_path %>
+
+</div>
