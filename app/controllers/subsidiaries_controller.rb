@@ -1,5 +1,7 @@
 class SubsidiariesController < ApplicationController
 
+    before_action :find_subsidiary, only: [:show, :edit, :update, :destroy]
+
     def index
         @subsidiaries = Subsidiary.all
     end
@@ -9,15 +11,12 @@ class SubsidiariesController < ApplicationController
     end
 
     def show
-        @subsidiary = Subsidiary.find(params[:id])
     end
 
     def edit
-        @subsidiary = Subsidiary.find(params[:id])
     end
 
     def update 
-        @subsidiary = Subsidiary.find(params[:id])
         if @subsidiary.update(subsidiary_params)
             flash[:notice] = 'Filial alterada com sucesso'
             redirect_to @subsidiary
@@ -35,11 +34,21 @@ class SubsidiariesController < ApplicationController
             render :new
         end
     end
+
+    def destroy
+        @subsidiary.destroy
+        flash[:notice] = 'Filial removida com sucesso'
+        redirect_to subsidiaries_url
+    end
     
     private 
     
     def subsidiary_params
         params.require(:subsidiary).permit(:name, :cnpj, :address)
+    end
+
+    def find_subsidiary
+        @subsidiary = Subsidiary.find(params[:id])
     end
             
 end     

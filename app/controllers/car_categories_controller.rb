@@ -1,11 +1,12 @@
 class CarCategoriesController < ApplicationController
 
+    before_action :find_car_category, only: [:show, :edit, :update, :destroy]
+
     def index
         @car_categories = CarCategory.all
     end
 
     def show 
-        @car_category = CarCategory.find(params[:id])
     end
 
     def new
@@ -13,11 +14,9 @@ class CarCategoriesController < ApplicationController
     end
 
     def edit
-        @car_category = CarCategory.find(params[:id])
     end
 
     def update
-        @car_category = CarCategory.find(params[:id])
         if @car_category.update(get_params)
             flash[:notice] = 'Categoria de carro alterada com sucesso'
             redirect_to @car_category
@@ -36,9 +35,19 @@ class CarCategoriesController < ApplicationController
         end
     end
 
+    def destroy
+        @car_category.destroy
+        flash[:notice] = 'Categoria de carro removida com sucesso'
+        redirect_to car_categories_url
+    end
+
     private 
     def get_params
         params.require(:car_category).permit(:name, :daily_rate, :car_insurance, :third_party_insurance)
+    end
+
+    def find_car_category
+        @car_category = CarCategory.find(params[:id])
     end
 
 end

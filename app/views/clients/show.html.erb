@@ -4,4 +4,5 @@
 <h3><%= @client.email %></h3>
 
 <%= link_to 'Editar', edit_client_path(@client) %>
-<%= link_to 'Voltar', root_path %>
+<%= link_to 'Remover', @client , method: :delete, data: {confirm: "Deseja remover o cliente: #{@client.name} ?"} %>
+<%= link_to 'Voltar', root_url %>

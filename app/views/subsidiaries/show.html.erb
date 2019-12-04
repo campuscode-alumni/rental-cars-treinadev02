@@ -3,4 +3,5 @@
 <h3><%= @subsidiary.address %></h3>
 
 <%= link_to 'Editar', edit_subsidiary_path(@subsidiary) %>
+<%= link_to 'Remover', @subsidiary , method: :delete, data: {confirm: "Deseja remover a filial: #{@subsidiary.name} ?"} %>
 <%= link_to 'Voltar', root_url %>

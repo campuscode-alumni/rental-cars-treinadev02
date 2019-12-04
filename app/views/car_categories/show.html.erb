@@ -4,4 +4,5 @@
 <h3> R$ <%= @car_category.third_party_insurance %> </h3>
 
 <%= link_to 'Editar', edit_car_category_path(@car_category) %>
+<%= link_to 'Remover', @car_category , method: :delete, data: {confirm: "Deseja remover a categoria de carro: #{@car_category.name} ?"} %>
 <%= link_to 'Voltar', root_url %>
