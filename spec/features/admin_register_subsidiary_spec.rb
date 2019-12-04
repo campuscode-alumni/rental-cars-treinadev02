@@ -15,4 +15,16 @@ feature 'Admin register subsidiary' do
     expect(page).to have_content 'CNPJ: 56.420.114/0001-45'
     expect(page).to have_content 'Endereço: Rua Domingos de Morais, 1000'
   end
+
+  scenario 'and must fill in all fields' do
+    visit root_path
+    click_on 'Filiais'
+    click_on 'Registrar nova filial'
+
+    click_on 'Enviar'
+
+    expect(page).to have_content 'Nome não pode ficar em branco'
+    expect(page).to have_content 'CNPJ não pode ficar em branco'
+    expect(page).to have_content 'Endereço não pode ficar em branco'
+  end
 end

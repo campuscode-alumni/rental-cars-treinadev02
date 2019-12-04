@@ -1,0 +1,24 @@
+<% if client.errors.any? %>
+  <ul>
+  <% client.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: client, local: true do |f| %>
+  <p>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :name, 'Nome' %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :document, 'CPF' %>
+    <%= f.text_field :document %>
+  <p>
+    <%= f.submit 'Enviar' %>
+  </p>
+<% end %>

@@ -11,10 +11,26 @@ class SubsidiariesController < ApplicationController
     @subsidiary = Subsidiary.new
   end
 
+  def edit
+    @subsidiary = Subsidiary.find(params[:id])
+  end
+
   def create
     @subsidiary = Subsidiary.new(subsidiary_params)
-    @subsidiary.save
-    redirect_to @subsidiary
+    if @subsidiary.save
+      redirect_to @subsidiary
+    else
+      render :new
+    end
+  end
+
+  def update
+    @subsidiary = Subsidiary.find(params[:id])
+    if @subsidiary.update(subsidiary_params)
+      redirect_to @subsidiary
+    else
+      render :edit
+    end
   end
 
   private
