@@ -1,5 +1,11 @@
 <h1><%= @manufacturer.name %></h1>
 
+<h2>Modelos Cadastrados</h2>
+<% @manufacturer.car_models.each do |cm| %>
+  <%= cm.name %>
+<% end %>
+
+
 <%= link_to 'Editar', edit_manufacturer_path(@manufacturer) %>
 
 <%= link_to 'Voltar', manufacturers_path %>
