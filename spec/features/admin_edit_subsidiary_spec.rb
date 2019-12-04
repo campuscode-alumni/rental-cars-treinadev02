@@ -19,4 +19,31 @@ feature 'Admin edit subsidiary' do
         expect(page). to have_content('Av. Pompeia, 500')
         expect(page). to have_content('Filial alterada com sucesso')
     end 
+
+    scenario 'and must fill in all fiedls' do
+        Subsidiary.create!(name: 'Filial SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
+
+        visit subsidiaries_path
+        click_on 'Filial SP'
+        click_on 'Editar'
+
+        fill_in 'Nome', with: ''
+        click_on 'Enviar'
+
+        expect(page).to have_content('O campo deve ser preenchido')
+    end
+
+    scenario 'and must be unique' do
+        Subsidiary.create!(name: 'Filial SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
+        Subsidiary.create!(name: 'Filial MG', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
+
+        visit subsidiaries_path
+        click_on 'Filial SP'
+        click_on 'Editar'
+
+        fill_in 'Nome', with: 'Filial MG'
+        click_on 'Enviar'
+
+        expect(page).to have_content('Nome já esta em uso')
+    end
 end
