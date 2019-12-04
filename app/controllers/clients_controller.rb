@@ -1,5 +1,6 @@
 class ClientsController < ApplicationController
   def index
+    @client = Client.all
   end
 
   def new
@@ -23,8 +24,8 @@ class ClientsController < ApplicationController
 
   private
 
-    def client_params
-      params.require(:client).permit(:name, :cpf, :email)
-    end
+  def client_params
+    params.require(:client).permit(:name, :cpf, :email)
+  end
 
 end
