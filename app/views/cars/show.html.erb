@@ -1,0 +1,9 @@
+<h1><%= @car.license_plate %></h1>
+
+<h3><%= @car.color %></h3>
+<h3><%= @car.mileage %></h3>
+<h3><%= @car.subsidiary.name %></h3>
+<h3><%= @car.car_model.name %></h3>
+
+<%= link_to 'Editar', edit_car_path(@car) %>
+<%= link_to 'Voltar', root_url %>
