@@ -5,7 +5,10 @@ feature 'Visitor view manufacturers' do
     #Arrange
     Manufacturer.new(name: 'Fiat').save
     Manufacturer.create(name: 'Volkswagen')
+    user = User.create!(email: 'test@test.com', password: '123456')
+
     #Act
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Fabricantes'
     click_on 'Fiat'
@@ -17,7 +20,9 @@ feature 'Visitor view manufacturers' do
   scenario 'and return to home page' do
     Manufacturer.create(name: 'Fiat')
     Manufacturer.create(name: 'Volkswagen')
+    user = User.create!(email: 'test@test.com', password: '123456')
 
+    login_as(user, scope: :user)
     visit root_path
     click_on 'Fabricantes'
     click_on 'Fiat'
