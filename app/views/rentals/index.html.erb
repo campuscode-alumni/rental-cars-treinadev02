@@ -1,0 +1,19 @@
+<h1> Agendamento de carros </h1>
+
+<%= link_to 'Agendar locação', new_rental_path %>
+
+<% if @rentals.empty? %>
+    <p>Não possui agendamentos cadastrados.</p>
+<% end %> 
+
+
+<ul>
+    <% @rentals.each do |rental| %>
+        <li>
+            <%= link_to rental.client.name, rental_path(rental) %>
+            <%= rental.car_category.name %>
+            <%= rental.start_date %>
+            <%= rental.end_date %>
+        </li>
+    <% end %>
+</ul>
