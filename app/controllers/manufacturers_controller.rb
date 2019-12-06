@@ -1,7 +1,9 @@
 class ManufacturersController < ApplicationController
 
+    before_action :authenticate_user!
+    before_action :authenticate_admin
     before_action :find_manufacturer, only: [:show, :edit, :update, :destroy]
-
+    
     def index
         @manufacturers = Manufacturer.all
     end
@@ -50,5 +52,9 @@ class ManufacturersController < ApplicationController
 
     def find_manufacturer
         @manufacturer = Manufacturer.find(params[:id])
+    end
+
+    def authenticate_admin
+        redirect_to root_path unless current_user.admin?
     end
 end

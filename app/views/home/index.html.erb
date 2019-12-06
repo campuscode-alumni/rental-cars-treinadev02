@@ -3,6 +3,7 @@
 <h3>Bem vindo ao sistema de gestão de locação</h3>
 <% if user_signed_in? %>
     <p><span>Olá <%= current_user.email%></span></p>
+    <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
 <% else %>
     <%= link_to 'Entrar', new_user_session_path %>
 <% end %>
