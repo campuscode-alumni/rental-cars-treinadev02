@@ -8,3 +8,8 @@
 <%= link_to 'Clientes', clients_path %>
 <%= link_to 'Modelos de Carro', car_models_path %>
 <%= link_to 'Carros', cars_path %>
+<% if user_signed_in? %>
+    <span>Olá <%= current_user.email%></span>
+<% else %>
+    <%= link_to 'Entrar', new_user_session_path %>
+<% end %>
