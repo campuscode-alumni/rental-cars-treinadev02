@@ -2,9 +2,8 @@ require 'rails_helper'
 
 feature 'Admin register manufacturer' do
   scenario 'successfully' do
-    
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
-    login_as(user, scope: user)
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    login_as(user)
 
     visit root_path
     click_on 'Fabricantes'
@@ -18,6 +17,9 @@ feature 'Admin register manufacturer' do
   end
 
   scenario 'and must fill in all fiedls' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    login_as(user)
+
     visit new_manufacturer_path
 
     click_on 'Enviar'
@@ -26,6 +28,9 @@ feature 'Admin register manufacturer' do
   end
 
   scenario 'and must be unique' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    login_as(user)
+    
     Manufacturer.create!(name: 'Fiat')
     
     visit new_manufacturer_path
@@ -36,8 +41,36 @@ feature 'Admin register manufacturer' do
     expect(page).to have_content('Nome já esta em uso')
   end
 
-  scenario 'must be admin' do
+  scenario 'and no have access to manufacturer' do
+    visit root_path
 
-  
+    expect(page).not_to have_content('Fabricantes')
+  end
+
+  scenario 'no log in to access index' do
+    visit manufacturers_path 
+
+    expect(current_path).to eq(new_user_session_path)
+  end
+
+  scenario 'access create with a no admin user' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    login_as(user)
+    
+    visit new_manufacturer_path 
+
+    expect(current_path).to eq(root_path)
+  end
+
+  scenario 'access update with a no admin user' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    login_as(user)
+
+    manufacturer = Manufacturer.create!(name: 'Fiat')
+    
+    visit edit_manufacturer_path(manufacturer) 
+
+    expect(current_path).to eq(root_path)
+  end
 
 end

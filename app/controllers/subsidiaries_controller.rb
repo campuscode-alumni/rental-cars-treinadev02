@@ -1,5 +1,7 @@
 class SubsidiariesController < ApplicationController
 
+    before_action :authenticate_user!
+    before_action :authenticate_admin, only: [:new, :create, :edit, :update, :destroy]
     before_action :find_subsidiary, only: [:show, :edit, :update, :destroy]
 
     def index
@@ -50,5 +52,8 @@ class SubsidiariesController < ApplicationController
     def find_subsidiary
         @subsidiary = Subsidiary.find(params[:id])
     end
-            
+    
+    def authenticate_admin
+        redirect_to root_path unless current_user.admin?
+    end             
 end     

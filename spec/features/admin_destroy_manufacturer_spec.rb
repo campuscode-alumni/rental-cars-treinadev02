@@ -2,6 +2,9 @@ require 'rails_helper'
 
 feature 'Admin delete a manufacturer' do
     scenario 'successfully' do
+        user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+        login_as(user)
+        
         Manufacturer.create(name: 'Fiat')
                            
         visit manufacturers_path

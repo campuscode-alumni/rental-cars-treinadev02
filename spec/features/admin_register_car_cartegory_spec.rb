@@ -2,6 +2,9 @@ require 'rails_helper'
 
 feature 'Admin register car category' do
   scenario 'successfully' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    login_as(user)
+    
     visit root_path
     click_on 'Categorias de carro'
     click_on 'Registrar nova categoria'
@@ -20,6 +23,9 @@ feature 'Admin register car category' do
   end
 
   scenario 'and must fill in all fiedls' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    login_as(user)
+    
     visit new_car_category_path
 
     click_on 'Enviar'
@@ -29,6 +35,9 @@ feature 'Admin register car category' do
   end
 
   scenario 'and must be unique' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    login_as(user)
+    
     CarCategory.create!(name: 'Carro pequeno', daily_rate: '50', car_insurance: '25', 
                        third_party_insurance: '15')
     
@@ -45,6 +54,9 @@ feature 'Admin register car category' do
   end
 
   scenario 'and price must be a posite number' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    login_as(user)
+    
     CarCategory.create!(name: 'Carro pequeno', daily_rate: '50', car_insurance: '25', 
                        third_party_insurance: '15')
     
@@ -58,5 +70,38 @@ feature 'Admin register car category' do
     click_on 'Enviar'
 
     expect(page).to have_content('Valor deve ser maior que zero')
+  end
+
+  scenario 'and no have access to car category' do
+    visit root_path
+
+    expect(page).not_to have_content('Categorias de carro')
+  end
+
+  scenario 'no log in to access index' do
+    visit car_categories_path 
+
+    expect(current_path).to eq(new_user_session_path)
+  end
+
+  scenario 'access create with a no admin user' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    login_as(user)
+    
+    visit new_car_category_path 
+
+    expect(current_path).to eq(root_path)
+  end
+
+  scenario 'access update with a no admin user' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    login_as(user)
+
+    car_category = CarCategory.create!(name: 'Carro pequeno', daily_rate: '50', car_insurance: '25', 
+                                       third_party_insurance: '15')
+    
+    visit edit_car_category_path(car_category) 
+
+    expect(current_path).to eq(root_path)
   end
 end

@@ -42,11 +42,4 @@ feature 'Visitor view subsidiaries' do
     expect(page).to have_content('RentalCars SP')
   end
 
-  scenario 'and no-register manufacturers' do
-    visit root_path
-    click_on 'Fabricantes'
-      
-    expect(page).to have_content('Não possui fabricantes cadastradas.')
-  end
-
 end

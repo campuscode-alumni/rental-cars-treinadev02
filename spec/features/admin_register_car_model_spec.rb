@@ -2,6 +2,9 @@ require 'rails_helper'
 
 feature 'Admin register car model' do
   scenario 'successfully' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    login_as(user)
+    
     Manufacturer.create!(name: 'Chevrolet')
     Manufacturer.create!(name: 'Honda')
     CarCategory.create!(name: 'A', daily_rate: 100, car_insurance: 50,
@@ -29,6 +32,9 @@ feature 'Admin register car model' do
   end
 
   scenario 'and must fill in all fields' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    login_as(user)
+        
     visit new_car_model_path
 
     click_on 'Enviar'
@@ -37,11 +43,12 @@ feature 'Admin register car model' do
   end
 
   scenario 'and name must be unique' do
-    manufacturer = Manufacturer.new(name: 'Chevrolet')
-    manufacturer.save! 
-    car_category = CarCategory.new(name: 'A', daily_rate: 100, car_insurance: 50,
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    login_as(user)
+    
+    manufacturer = Manufacturer.create!(name: 'Chevrolet')
+    car_category = CarCategory.create!(name: 'A', daily_rate: 100, car_insurance: 50,
                         third_party_insurance: 90)
-    car_category.save!
 
     CarModel.create!(name: 'Onix', year: 2020, motorization: '1.5', fuel_type:'Flex',
                                  manufacturer_id:manufacturer.id, car_category_id: car_category.id)
@@ -61,6 +68,9 @@ feature 'Admin register car model' do
   end
 
   scenario 'and year must be bigger than 1980' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    login_as(user)
+    
     Manufacturer.create!(name: 'Chevrolet')
     CarCategory.create!(name: 'A', daily_rate: 100, car_insurance: 50,
                         third_party_insurance: 90)
@@ -79,4 +89,40 @@ feature 'Admin register car model' do
     expect(page).to have_content('Ano deve ser maior que 1980')
   end
 
+  scenario 'and no have access to manufacturer' do
+    visit root_path
+
+    expect(page).not_to have_content('Modelos de Carro')
+  end
+
+  scenario 'no log in to access index' do
+    visit car_models_path 
+
+    expect(current_path).to eq(new_user_session_path)
+  end
+
+  scenario 'access create with a no admin user' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    login_as(user)
+    
+    visit new_car_model_path 
+
+    expect(current_path).to eq(root_path)
+  end
+
+  scenario 'access update with a no admin user' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    login_as(user)
+
+    manufacturer = Manufacturer.create!(name: 'Chevrolet')
+    car_category = CarCategory.create!(name: 'A', daily_rate: 100, car_insurance: 50,
+                        third_party_insurance: 90)
+
+    car_model = CarModel.create!(name: 'Onix', year: 2020, motorization: '1.5', fuel_type:'Flex',
+                                 manufacturer_id:manufacturer.id, car_category_id: car_category.id)
+    
+    visit edit_manufacturer_path(car_model) 
+
+    expect(current_path).to eq(root_path)
+  end
 end

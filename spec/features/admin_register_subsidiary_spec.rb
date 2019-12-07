@@ -2,6 +2,9 @@ require 'rails_helper'
 
 feature 'Admin register subsidiary' do
   scenario 'successfully' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    login_as(user)
+    
     visit root_path
     click_on 'Filiais'
     click_on 'Registrar nova filial'
@@ -18,6 +21,9 @@ feature 'Admin register subsidiary' do
   end
 
   scenario 'and must fill in all fiedls' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    login_as(user)
+    
     visit new_subsidiary_path
     
     click_on 'Enviar'
@@ -26,6 +32,9 @@ feature 'Admin register subsidiary' do
   end
 
   scenario 'and must be unique' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    login_as(user)
+
     Subsidiary.create!(name: 'Filial SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
     
     visit new_subsidiary_path
@@ -39,4 +48,36 @@ feature 'Admin register subsidiary' do
     expect(page).to have_content('Nome já esta em uso')
   end
 
+  scenario 'and no have access to subsidiary' do
+    visit root_path
+
+    expect(page).not_to have_content('Filiais')
+  end
+
+  scenario 'no log in to access index' do
+    visit subsidiaries_path 
+
+    expect(current_path).to eq(new_user_session_path)
+  end
+
+  scenario 'access create with a no admin user' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    login_as(user)
+    
+    visit new_subsidiary_path 
+
+    expect(current_path).to eq(root_path)
+  end
+
+  scenario 'access update with a no admin user' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    login_as(user)
+
+    subsidiary = Subsidiary.create!(name: 'Filial SP', cnpj:'92.123.674/0001-00', 
+                                    address: 'Av. Paulista, 1000')
+    
+    visit edit_manufacturer_path(subsidiary) 
+
+    expect(current_path).to eq(root_path)
+  end
 end

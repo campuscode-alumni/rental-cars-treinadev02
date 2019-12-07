@@ -1,17 +1,25 @@
 <h1>Rental Cars</h1>
 
 <h3>Bem vindo ao sistema de gestão de locação</h3>
+
 <% if user_signed_in? %>
     <p><span>Olá <%= current_user.email%></span></p>
     <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+
+    <% if current_user.admin? %>
+        <%= link_to 'Fabricantes', manufacturers_path %>
+        <%= link_to 'Filiais', subsidiaries_path %>
+        <%= link_to 'Categorias de carro', car_categories_path %>
+        <%= link_to 'Modelos de Carro', car_models_path %>
+        <%= link_to 'Carros', cars_path %>
+    <% end %>
+
+    <% if current_user.employee?%>
+        <%= link_to 'Clientes', clients_path %>
+        <%= link_to 'Agendamento de locação de carro', rentals_path%>
+    <% end %>
 <% else %>
     <%= link_to 'Entrar', new_user_session_path %>
 <% end %>
-<%= link_to 'Fabricantes', manufacturers_path %>
-<%= link_to 'Filiais', subsidiaries_path %>
-<%= link_to 'Categorias de carro', car_categories_path %>
-<%= link_to 'Clientes', clients_path %>
-<%= link_to 'Modelos de Carro', car_models_path %>
-<%= link_to 'Carros', cars_path %>
-<%= link_to 'Agendamento de locação de carro', rentals_path%>
+
 

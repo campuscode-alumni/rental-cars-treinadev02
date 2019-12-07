@@ -2,6 +2,9 @@ require 'rails_helper'
 
 feature 'Visitor view manufacturers' do
   scenario 'successfully' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    login_as(user)
+
     Manufacturer.create!(name: 'Fiat')
     Manufacturer.create!(name: 'Volkswagen')
 
@@ -14,6 +17,9 @@ feature 'Visitor view manufacturers' do
   end
 
   scenario 'and return to home page' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    login_as(user)
+
     Manufacturer.create!(name: 'Fiat')
     Manufacturer.create!(name: 'Volkswagen')
 
@@ -26,6 +32,9 @@ feature 'Visitor view manufacturers' do
   end
 
   scenario 'and no-register manufacturers' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    login_as(user)
+    
     visit root_path
     click_on 'Fabricantes'
     
