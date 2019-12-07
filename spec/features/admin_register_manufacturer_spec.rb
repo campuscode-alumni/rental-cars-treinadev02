@@ -61,16 +61,4 @@ feature 'Admin register manufacturer' do
 
     expect(current_path).to eq(root_path)
   end
-
-  scenario 'access update with a no admin user' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
-    login_as(user)
-
-    manufacturer = Manufacturer.create!(name: 'Fiat')
-    
-    visit edit_manufacturer_path(manufacturer) 
-
-    expect(current_path).to eq(root_path)
-  end
-
 end

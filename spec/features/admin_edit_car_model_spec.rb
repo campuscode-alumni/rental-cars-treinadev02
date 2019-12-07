@@ -1,16 +1,17 @@
 require 'rails_helper'
 
-feature 'Admin register car model' do
+feature 'Admin edit car model' do
   scenario 'successfully' do
-    manufacturer = Manufacturer.new(name: 'Chevrolet')
-    manufacturer.save
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    login_as(user)
 
-    car_category = CarCategory.new(name: 'A', daily_rate: 100, car_insurance: 50,
+    manufacturer = Manufacturer.create!(name: 'Chevrolet')
+
+    car_category = CarCategory.create!(name: 'A', daily_rate: 100, car_insurance: 50,
                         third_party_insurance: 90)
     CarCategory.create!(name: 'B', daily_rate: 115, car_insurance: 55,
                             third_party_insurance: 120)
-    car_category.save
-
+                            
     CarModel.create!(name: 'Onix', year: '2020', motorization: '1.0', fuel_type: 'Flex',
                      manufacturer_id: manufacturer.id, car_category_id: car_category.id)
     
@@ -34,4 +35,21 @@ feature 'Admin register car model' do
     expect(page).to have_content('Fabricante: Chevrolet')
     expect(page).to have_content('Categoria: B')
   end
+
+  scenario 'access update without a admin user' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    login_as(user)
+
+    manufacturer = Manufacturer.create!(name: 'Chevrolet')
+    
+    car_category = CarCategory.create!(name: 'A', daily_rate: 100, car_insurance: 50,
+                        third_party_insurance: 90)
+    car_model = CarModel.create!(name: 'Onix', year: '2020', motorization: '1.0', fuel_type: 'Flex',
+                     manufacturer_id: manufacturer.id, car_category_id: car_category.id)
+    
+    visit edit_car_model_path(car_model) 
+
+    expect(current_path).to eq(root_path)
+  end
+
 end

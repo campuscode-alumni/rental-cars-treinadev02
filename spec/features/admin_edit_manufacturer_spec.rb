@@ -2,9 +2,10 @@ require 'rails_helper'
 
 feature 'Admin edits manufacturer' do
   scenario 'successfully' do
-    Manufacturer.create(name: 'Fiat')
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
     login_as(user)
+    
+    Manufacturer.create(name: 'Fiat')
 
     visit root_path
     click_on 'Fabricantes'
@@ -18,7 +19,7 @@ feature 'Admin edits manufacturer' do
   end
 
   scenario 'and must fill in all fiedls' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
     login_as(user)
     
     Manufacturer.create!(name: 'Fiat')
@@ -33,7 +34,7 @@ feature 'Admin edits manufacturer' do
   end
 
   scenario 'and must be unique' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
     login_as(user)
     
     Manufacturer.create!(name: 'Fiat')
@@ -47,6 +48,17 @@ feature 'Admin edits manufacturer' do
     
     expect(page).to have_content('Nome já esta em uso')
   end
+
+  scenario 'access update with a no admin user' do
+    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    login_as(user)
+
+    manufacturer = Manufacturer.create!(name: 'Fiat')
+    
+    visit edit_manufacturer_path(manufacturer) 
+
+    expect(current_path).to eq(root_path)
+  end  
 
   
 end

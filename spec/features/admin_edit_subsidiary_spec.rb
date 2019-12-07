@@ -2,6 +2,9 @@ require 'rails_helper'
 
 feature 'Admin edit subsidiary' do
     scenario 'successfully' do 
+        user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+        login_as(user)
+        
         Subsidiary.create!(name: 'Filial SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
 
         visit root_path
@@ -21,6 +24,9 @@ feature 'Admin edit subsidiary' do
     end 
 
     scenario 'and must fill in all fiedls' do
+        user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+        login_as(user)
+        
         Subsidiary.create!(name: 'Filial SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
 
         visit subsidiaries_path
@@ -34,6 +40,9 @@ feature 'Admin edit subsidiary' do
     end
 
     scenario 'and must be unique' do
+        user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+        login_as(user)
+        
         Subsidiary.create!(name: 'Filial SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
         Subsidiary.create!(name: 'Filial MG', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
 
@@ -46,4 +55,16 @@ feature 'Admin edit subsidiary' do
 
         expect(page).to have_content('Nome já esta em uso')
     end
+
+    scenario 'access update without a admin user' do
+        user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+        login_as(user)
+    
+        subsidiary = Subsidiary.create!(name: 'Filial SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
+        
+        visit edit_subsidiary_path(subsidiary) 
+    
+        expect(current_path).to eq(root_path)
+      end
+
 end

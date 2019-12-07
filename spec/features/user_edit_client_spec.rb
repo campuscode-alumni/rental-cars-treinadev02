@@ -1,7 +1,9 @@
 require 'rails_helper'
 
-feature 'Admin edit client' do
+feature 'User edit client' do
     scenario 'successfully' do
+        
+        
         Client.create!(name: 'Fulano', cpf: '000.000.000-00', email: 'fulano@client.com')
 
         visit root_path
