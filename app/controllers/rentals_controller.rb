@@ -1,5 +1,8 @@
 class RentalsController < ApplicationController
     
+    before_action :authenticate_user!
+    before_action :find_rental, only: [:show, :edit, :update, :destroy]
+
     def index
         @rentals = Rental.all
     end
@@ -11,13 +14,11 @@ class RentalsController < ApplicationController
     end
 
     def edit
-        @rental = Rental.find(params[:id])
         @clients = Client.all 
         @car_categories = CarCategory.all 
     end
 
     def show
-        @rental = Rental.find(params[:id])
     end
 
     def create
@@ -33,7 +34,6 @@ class RentalsController < ApplicationController
     end
 
     def update
-        @rental = Rental.find(params[:id])
         if @rental.update rental_params
             flash[:notice] = 'Locação alterada com sucesso'
             redirect_to @rental            
@@ -44,14 +44,14 @@ class RentalsController < ApplicationController
         end
     end
     
-
-
-
-
     private 
 
     def rental_params
         params.require(:rental).permit(:start_date, :end_date, :client_id, :car_category_id)
+    end
+
+    def find_rental
+        @rental = Rental.find(params[:id])
     end
 
 end
