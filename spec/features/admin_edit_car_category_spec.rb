@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Admin edits car category' do
     scenario 'successfully' do
-      user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+      user = create(:user)
       login_as(user)
       
       CarCategory.create(name:'Carro de passeio leve', daily_rate: '60', car_insurance:'40',
@@ -28,7 +28,7 @@ feature 'Admin edits car category' do
     end
 
     scenario 'and must fill in all fiedls' do
-      user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+      user = create(:user)
       login_as(user)
       
       CarCategory.create!(name: 'Carro pequeno', daily_rate: '50', car_insurance: '25', 
@@ -49,7 +49,7 @@ feature 'Admin edits car category' do
     end
     
     scenario 'and must be unique' do
-      user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+      user = create(:user)
       login_as(user)
       
       CarCategory.create!(name: 'Carro pequeno', daily_rate: '50', car_insurance: '25', 
@@ -69,7 +69,7 @@ feature 'Admin edits car category' do
     end
     
     scenario 'and price must be a posite number' do
-      user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+      user = create(:user)
       login_as(user)
       
       CarCategory.create!(name: 'Carro pequeno', daily_rate: '50', car_insurance: '25', 
@@ -89,7 +89,7 @@ feature 'Admin edits car category' do
     end
 
     scenario 'access update with a no admin user' do
-      user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+      user = create(:user, role: :employee)
       login_as(user)
   
       car_category = CarCategory.create!(name: 'Carro pequeno', daily_rate: '50', car_insurance: '25', 

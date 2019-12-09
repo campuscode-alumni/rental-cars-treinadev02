@@ -2,10 +2,10 @@ require 'rails_helper'
 
 feature 'Admin edit subsidiary' do
     scenario 'successfully' do 
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+        user = create(:user)
         login_as(user)
         
-        Subsidiary.create!(name: 'Filial SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
+        Subsidiary.create!(name: 'Unidade SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
 
         visit root_path
         click_on 'Filiais'
@@ -24,10 +24,10 @@ feature 'Admin edit subsidiary' do
     end 
 
     scenario 'and must fill in all fiedls' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+        user = create(:user)
         login_as(user)
         
-        Subsidiary.create!(name: 'Filial SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
+        Subsidiary.create!(name: 'Unidade SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
 
         visit subsidiaries_path
         click_on 'Filial SP'
@@ -40,10 +40,10 @@ feature 'Admin edit subsidiary' do
     end
 
     scenario 'and must be unique' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+        user = create(:user)
         login_as(user)
         
-        Subsidiary.create!(name: 'Filial SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
+        Subsidiary.create!(name: 'Unidade SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
         Subsidiary.create!(name: 'Filial MG', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
 
         visit subsidiaries_path
@@ -57,10 +57,10 @@ feature 'Admin edit subsidiary' do
     end
 
     scenario 'access update without a admin user' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+        user = create(:user, role: :employee)
         login_as(user)
     
-        subsidiary = Subsidiary.create!(name: 'Filial SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
+        subsidiary = Subsidiary.create!(name: 'Unidade SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
         
         visit edit_subsidiary_path(subsidiary) 
     

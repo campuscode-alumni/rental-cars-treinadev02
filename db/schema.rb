@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_06_202930) do
+ActiveRecord::Schema.define(version: 2019_12_09_132725) do
 
   create_table "car_categories", force: :cascade do |t|
     t.string "name"
@@ -88,8 +88,10 @@ ActiveRecord::Schema.define(version: 2019_12_06_202930) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role", default: 0
+    t.integer "subsidiary_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["subsidiary_id"], name: "index_users_on_subsidiary_id"
   end
 
 end

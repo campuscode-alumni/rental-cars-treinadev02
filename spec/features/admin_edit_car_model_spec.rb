@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Admin edit car model' do
   scenario 'successfully' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    user = create(:user)
     login_as(user)
 
     manufacturer = Manufacturer.create!(name: 'Chevrolet')
@@ -37,7 +37,7 @@ feature 'Admin edit car model' do
   end
 
   scenario 'access update without a admin user' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    user = create(:user, role: :employee)
     login_as(user)
 
     manufacturer = Manufacturer.create!(name: 'Chevrolet')

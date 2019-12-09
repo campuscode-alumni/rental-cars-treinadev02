@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   enum role: [:employee, :admin]
+
+  belongs_to :subsidiary
 end

@@ -36,9 +36,21 @@
         
     </nav>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <% if !notice.nil?%> 
+      <div class="container">
+        <p class="alert alert-success"><%= notice %></p>
+      </div>
+    <% end %>
 
-    <%= yield %>
+    <% if !alert.nil?%> 
+      <div class="container">
+        <p class="alert alert-danger"><%= alert %></p>
+      </div>
+    <% end %>
+    
+
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>

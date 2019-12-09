@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Admin edit a car' do
     scenario 'successfully' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+        user = create(:user)
         login_as(user)
         
         manufacturer = Manufacturer.new(name: 'Chevrolet')
@@ -55,7 +55,7 @@ feature 'Admin edit a car' do
     end
 
     scenario 'and must fill in all fiedls' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+        user = create(:user)
         login_as(user)
         
         manufacturer = Manufacturer.new(name: 'Chevrolet')
@@ -91,7 +91,7 @@ feature 'Admin edit a car' do
     end
 
     scenario 'and license plate must be unique' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+        user = create(:user)
         login_as(user)
         
         manufacturer = Manufacturer.new(name: 'Chevrolet')
@@ -128,7 +128,7 @@ feature 'Admin edit a car' do
     end
 
     scenario 'and mileage must be zero or be bigger' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+        user = create(:user)
         login_as(user)
         
         manufacturer = Manufacturer.new(name: 'Chevrolet')
@@ -162,7 +162,7 @@ feature 'Admin edit a car' do
     end
 
     scenario 'access update with a no admin user' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+        user = create(:user, role: :employee)
         login_as(user)
     
         manufacturer = Manufacturer.create!(name: 'Chevrolet')

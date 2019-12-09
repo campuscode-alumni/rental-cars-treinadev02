@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Admin register subsidiary' do
   scenario 'successfully' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    user = create(:user)
     login_as(user)
     
     visit root_path
@@ -21,7 +21,7 @@ feature 'Admin register subsidiary' do
   end
 
   scenario 'and must fill in all fiedls' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    user = create(:user)
     login_as(user)
     
     visit new_subsidiary_path
@@ -32,14 +32,14 @@ feature 'Admin register subsidiary' do
   end
 
   scenario 'and must be unique' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    user = create(:user)
     login_as(user)
 
-    Subsidiary.create!(name: 'Filial SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
+    Subsidiary.create!(name: 'Unidade SP', cnpj:'92.123.674/0001-00', address: 'Av. Paulista, 1000')
     
     visit new_subsidiary_path
     
-    fill_in 'Nome', with: 'Filial SP'
+    fill_in 'Nome', with: 'Unidade SP'
     fill_in 'CNPJ', with: '43.466.839/0001-22'
     fill_in 'Endereço', with: 'Av. Paulista, 1527'
 
@@ -61,7 +61,7 @@ feature 'Admin register subsidiary' do
   end
 
   scenario 'access create with a no admin user' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    user = create(:user, role: :employee)
     login_as(user)
     
     visit new_subsidiary_path 
@@ -70,10 +70,10 @@ feature 'Admin register subsidiary' do
   end
 
   scenario 'access update with a no admin user' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    user = create(:user, role: :employee)
     login_as(user)
 
-    subsidiary = Subsidiary.create!(name: 'Filial SP', cnpj:'92.123.674/0001-00', 
+    subsidiary = Subsidiary.create!(name: 'Unidade SP', cnpj:'92.123.674/0001-00', 
                                     address: 'Av. Paulista, 1000')
     
     visit edit_manufacturer_path(subsidiary) 

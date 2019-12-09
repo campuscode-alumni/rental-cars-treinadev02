@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Admin register manufacturer' do
   scenario 'successfully' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    user = create(:user)
     login_as(user)
 
     visit root_path
@@ -17,7 +17,7 @@ feature 'Admin register manufacturer' do
   end
 
   scenario 'and must fill in all fiedls' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    user = create(:user)
     login_as(user)
 
     visit new_manufacturer_path
@@ -28,7 +28,7 @@ feature 'Admin register manufacturer' do
   end
 
   scenario 'and must be unique' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    user = create(:user)
     login_as(user)
     
     Manufacturer.create!(name: 'Fiat')
@@ -42,7 +42,7 @@ feature 'Admin register manufacturer' do
   end
 
   scenario 'access create with a no admin user' do
-    user = User.create!(email: 'teste@tesste.com.br', password:'123456789')
+    user = create(:user, role: :employee)
     login_as(user)
     
     visit new_manufacturer_path 

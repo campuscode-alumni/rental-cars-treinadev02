@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'user register a rental' do
     scenario 'successfully using an user account' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+        user = create(:user, role: :employee)
         login_as(user)
         
         client = Client.create!(name: 'Fulano', cpf: '000.000.000-00', email: 'fulano@client.com')
@@ -39,7 +39,7 @@ feature 'user register a rental' do
     end
 
     scenario 'successfully using an admin account' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+        user = create(:user, role: :admin)
         login_as(user)
         
         client = Client.create!(name: 'Fulano', cpf: '000.000.000-00', email: 'fulano@client.com')

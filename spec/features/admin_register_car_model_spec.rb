@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Admin register car model' do
   scenario 'successfully' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    user = create(:user)
     login_as(user)
     
     Manufacturer.create!(name: 'Chevrolet')
@@ -32,7 +32,7 @@ feature 'Admin register car model' do
   end
 
   scenario 'and must fill in all fields' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    user = create(:user)
     login_as(user)
         
     visit new_car_model_path
@@ -43,7 +43,7 @@ feature 'Admin register car model' do
   end
 
   scenario 'and name must be unique' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    user = create(:user)
     login_as(user)
     
     manufacturer = Manufacturer.create!(name: 'Chevrolet')
@@ -68,7 +68,7 @@ feature 'Admin register car model' do
   end
 
   scenario 'and year must be bigger than 1980' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+    user = create(:user)
     login_as(user)
     
     Manufacturer.create!(name: 'Chevrolet')
@@ -102,7 +102,7 @@ feature 'Admin register car model' do
   end
 
   scenario 'access create with a no admin user' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    user = create(:user, role: :employee)
     login_as(user)
     
     visit new_car_model_path 
@@ -111,7 +111,7 @@ feature 'Admin register car model' do
   end
 
   scenario 'access update with a no admin user' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    user = create(:user, role: :employee)
     login_as(user)
 
     manufacturer = Manufacturer.create!(name: 'Chevrolet')

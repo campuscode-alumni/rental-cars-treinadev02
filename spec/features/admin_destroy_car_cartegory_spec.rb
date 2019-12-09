@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Admin delete a car category' do
     scenario 'successfully' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+        user = create(:user)
         login_as(user)
         
         CarCategory.create(name:'Carro de passeio leve', daily_rate: '60', 

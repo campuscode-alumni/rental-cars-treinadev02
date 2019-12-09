@@ -3,6 +3,8 @@ class Client < ApplicationRecord
     validates :cpf, :email, uniqueness: {message: 'O valor já esta em uso'}
     validate :verifying_cpf
 
+    has_many :rental
+
     def verifying_cpf
 
       cpf = self.cpf.delete('.-')

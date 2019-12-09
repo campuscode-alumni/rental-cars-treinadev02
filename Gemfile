@@ -16,6 +16,9 @@ gem 'uglifier', '>= 1.3.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 gem 'mini_racer', platforms: :ruby
 
+gem "twitter-bootstrap-rails"
+
+
 # Use to sign in and security
 gem 'devise'
 
@@ -40,6 +43,9 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # RSpec for Rails-3+
   gem 'rspec-rails', '~> 3.9'
+
+   gem 'factory_bot_rails'
+
 end
 
 group :development do

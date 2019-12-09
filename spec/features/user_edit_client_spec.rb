@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'User edit client' do
     scenario 'successfully' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+        user = create(:user, role: :employee)
         login_as(user)
         
         Client.create!(name: 'Fulano', cpf: '000.000.000-00', email: 'fulano@client.com')
@@ -25,7 +25,7 @@ feature 'User edit client' do
     end
 
     scenario 'and must fill all fields' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+        user = create(:user, role: :employee)
         login_as(user)
         
         Client.create!(name: 'Fulano', cpf: '000.000.000-00', email: 'fulano@client.com')
@@ -44,7 +44,7 @@ feature 'User edit client' do
     end
 
     scenario 'and must be unique' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+        user = create(:user, role: :employee)
         login_as(user)
         
         Client.create!(name: 'Fulano', cpf: '000.000.000-00', email: 'fulano@client.com')
@@ -64,7 +64,7 @@ feature 'User edit client' do
     end
 
     scenario 'and using a invalid CPF' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+        user = create(:user, role: :employee)
         login_as(user)
 
         Client.create!(name: 'Fulano', cpf: '253.756.110-40', email: 'siclano@client.com')
@@ -84,7 +84,7 @@ feature 'User edit client' do
     end
 
     scenario 'and using a alfanumeric CPF' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+        user = create(:user, role: :employee)
         login_as(user)
         
         Client.create!(name: 'Fulano', cpf: '253.756.110-40', email: 'siclano@client.com')
@@ -104,7 +104,7 @@ feature 'User edit client' do
     end
 
     scenario 'and using a CPF with less number than necessary' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+        user = create(:user, role: :employee)
         login_as(user)
         
         Client.create!(name: 'Fulano', cpf: '253.756.110-40', email: 'siclano@client.com')
@@ -132,7 +132,7 @@ feature 'User edit client' do
     end
 
     scenario 'successfully' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+        user = create(:user)
         login_as(user)
         
         Client.create!(name: 'Fulano', cpf: '000.000.000-00', email: 'fulano@client.com')

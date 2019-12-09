@@ -2,7 +2,7 @@ require 'rails_helper'
 
 feature 'Admin register a cliente' do 
     scenario 'successfully' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
+        user = create(:user)
         login_as(user)
         
         visit root_path
