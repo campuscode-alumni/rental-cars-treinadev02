@@ -5,7 +5,11 @@
   <%= cm.name %>
 <% end %>
 
-
 <%= link_to 'Editar', edit_manufacturer_path(@manufacturer) %>
 
 <%= link_to 'Voltar', manufacturers_path %>
+
+fiat = Manufacturer.find_by(name: 'Fiat')
+volks = Manufacturer.find_by(name: 'Volks')
+
+CarModel.where(manufacturer: [fiat, volks])

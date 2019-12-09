@@ -11,11 +11,6 @@
 
   <body>
     <% if user_signed_in? %>
-      <%= link_to 'Filiais', subsidiaries_path %>
-  <%= link_to 'Categorias de Carros', car_categories_path %>
-  <%= link_to 'Modelos de Carro', car_models_path %>
-  <%= link_to 'Fabricantes', manufacturers_path %>
-  <%= link_to 'Clientes', clients_path %>
       <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
     <% else %>
       <%= link_to 'Entrar', new_user_session_path %>
