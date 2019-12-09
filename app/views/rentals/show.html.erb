@@ -1,0 +1,10 @@
+<p>Data de início: <%= @rental.start_date.strftime('%d/%m/%Y') %></p>
+<p>Data de fim: <%= @rental.end_date.strftime('%d/%m/%Y') %></p>
+
+<h3>Cliente</h3>
+
+<p><%= @rental.client.name %></p>
+<p><%= @rental.client.document %></p>
+
+<h3>Categoria</h3>
+<p><%= @rental.car_category.name %></p>

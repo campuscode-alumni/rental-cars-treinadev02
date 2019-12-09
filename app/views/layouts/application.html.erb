@@ -15,6 +15,7 @@
     <% else %>
       <%= link_to 'Entrar', new_user_session_path %>
     <% end %>
+    <%= render partial: 'shared/menu' %>
     <%= notice %>
     <%= alert %>
     <%= yield %>
