@@ -6,6 +6,13 @@
     <p>Não possui agendamentos cadastrados.</p>
 <% end %> 
 
+<div>
+    <%= form_with url: rental_search_path, local: true, method: :get do %>
+        <%= label_tag :q, 'Codigo' %>
+        <%= text_field_tag :q %>
+    <% end %>
+</div>
+
 
 <ul>
     <% @rentals.each do |rental| %>

@@ -25,17 +25,17 @@ feature 'user register a rental' do
 
         fill_in 'Data Inicial', with: '2019/01/01'
         fill_in 'Data Final', with: '2019/01/07'
-        select 'Siclano', from: 'Cliente'
-        select 'Carro grande', from: 'Categoria'
+        select "#{client.name} - #{client.cpf}" , from: 'Cliente'
+        select car_category.name , from: 'Categoria'
 
         click_on 'Enviar'
 
         expect(page).to have_content('Locação alterada com sucesso')
         
-        expect(page).to have_content('2019-01-01')
-        expect(page).to have_content('2019-01-07')
-        expect(page).to have_content('Siclano')
-        expect(page).to have_content('Carro grande')
+        expect(page).to have_content('01/01/2019')
+        expect(page).to have_content('07/01/2019')
+        expect(page).to have_content("#{client.name} - #{client.cpf}")
+        expect(page).to have_content(car_category.name)
     end
 
     scenario 'successfully using an admin account' do
@@ -62,17 +62,17 @@ feature 'user register a rental' do
 
         fill_in 'Data Inicial', with: '2019/01/01'
         fill_in 'Data Final', with: '2019/01/07'
-        select 'Siclano', from: 'Cliente'
-        select 'Carro grande', from: 'Categoria'
+        select "#{client.name} - #{client.cpf}" , from: 'Cliente'
+        select car_category.name , from: 'Categoria'
 
         click_on 'Enviar'
 
         expect(page).to have_content('Locação alterada com sucesso')
         
-        expect(page).to have_content('2019-01-01')
-        expect(page).to have_content('2019-01-07')
-        expect(page).to have_content('Siclano')
-        expect(page).to have_content('Carro grande')
+        expect(page).to have_content('01/01/2019')
+        expect(page).to have_content('07/01/2019')
+        expect(page).to have_content("#{client.name} - #{client.cpf}")
+        expect(page).to have_content(car_category.name)
     end
 
     scenario 'and try update a rental without sing in' do

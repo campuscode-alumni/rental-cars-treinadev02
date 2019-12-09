@@ -1,8 +1,8 @@
-<h1><%= @rental.client.name%></h1>
+<h1><%= @rental.client.description%></h1>
 
 <h2><%= @rental.car_category.name %></h2>
-<h3>Inicio: <%= @rental.start_date%> </h3>
-<h3>Final:  <%= @rental.end_date %> </h3>
+<h3>Inicio: <%= @rental.start_date.strftime("%d/%m/%Y")%> </h3>
+<h3>Final:  <%= @rental.end_date.strftime("%d/%m/%Y") %> </h3>
 
 <%= link_to 'Editar', edit_rental_path(@rental) %>
 <%= link_to 'Voltar', root_url %>

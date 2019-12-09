@@ -5,7 +5,14 @@ class Client < ApplicationRecord
 
     has_many :rental
 
+    def description
+      "#{name} - #{cpf}"
+    end
+
     def verifying_cpf
+      unless cpf.present?
+        return
+      end
 
       cpf = self.cpf.delete('.-')
 
