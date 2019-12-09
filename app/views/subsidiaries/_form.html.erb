@@ -1,8 +1,8 @@
 <div>
-    <% if @subsidiary.errors.any? %>
+    <% if subsidiary.errors.any? %>
         <p>Você deve corrigir os seguintes erros:</p>
         <ul>
-            <% @subsidiary.errors.full_messages.each do |message| %>
+            <% subsidiary.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
             <% end %>
         </ul>
@@ -10,7 +10,7 @@
 </div>
 
 <div>
-    <%= form_with model: @subsidiary, local: true do |form| %>
+    <%= form_with model: subsidiary, local: true do |form| %>
         <p>
             <%= form.label :name, 'Nome' %>
             <%= form.text_field :name %>

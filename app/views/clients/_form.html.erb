@@ -1,8 +1,8 @@
 <div>
-    <% if @client.errors.any? %>
+    <% if client.errors.any? %>
         <p>Você deve corrigir os seguintes erros:</p>
         <ul>
-            <% @client.errors.full_messages.each do |message| %>
+            <% client.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
             <% end %>
         </ul>
@@ -10,7 +10,7 @@
 </div>
 
 <div>
-    <%= form_with model: @client, local: true do |form| %>
+    <%= form_with model: client, local: true do |form| %>
         <p>
             <%= form.label :name, 'Nome' %>
             <%= form.text_field :name %>

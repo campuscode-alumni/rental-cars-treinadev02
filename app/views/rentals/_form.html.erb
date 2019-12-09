@@ -1,8 +1,8 @@
 <div>
-    <% if @rental.errors.any? %>
+    <% if rental.errors.any? %>
         <p>Você deve corrigir os seguintes erros:</p>
         <ul>
-            <% @rental.errors.full_messages.each do |message| %>
+            <% rental.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
             <% end %>
         </ul>
@@ -10,7 +10,7 @@
 </div>
 
 <div>
-    <%= form_with model: @rental, local: true do |form| %>
+    <%= form_with model: rental, local: true do |form| %>
         <p>
             <%= form.label :start_date, 'Data Inicial'%>
             <%= form.date_field :start_date%>
@@ -21,11 +21,11 @@
         </p>
         <p>
             <%= form.label :client_id, 'Cliente'%>
-            <%= form.collection_select :client_id, @clients, :id, :name %>
+            <%= form.collection_select :client_id, clients, :id, :name %>
         </p>
         <p>
             <%= form.label :car_category_id, 'Categoria'%>
-            <%= form.collection_select :car_category_id, @car_categories, :id, :name %>
+            <%= form.collection_select :car_category_id, car_categories, :id, :name %>
         </p>
         <p>
             <%= form.submit 'Enviar'%>

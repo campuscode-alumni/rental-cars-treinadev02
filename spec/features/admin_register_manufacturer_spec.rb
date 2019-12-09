@@ -41,24 +41,13 @@ feature 'Admin register manufacturer' do
     expect(page).to have_content('Nome já esta em uso')
   end
 
-  scenario 'and no have access to manufacturer' do
-    visit root_path
-
-    expect(page).not_to have_content('Fabricantes')
-  end
-
-  scenario 'no log in to access index' do
-    visit manufacturers_path 
-
-    expect(current_path).to eq(new_user_session_path)
-  end
-
   scenario 'access create with a no admin user' do
-    user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+    user = User.create!(email: 'teste@tesste.com.br', password:'123456789')
     login_as(user)
     
     visit new_manufacturer_path 
 
     expect(current_path).to eq(root_path)
   end
+
 end

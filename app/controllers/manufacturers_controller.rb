@@ -1,6 +1,6 @@
 class ManufacturersController < ApplicationController
 
-    before_action :authenticate_user!
+    before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
     before_action :authenticate_admin, only: [:new, :create, :edit, :update, :destroy]
     before_action :find_manufacturer, only: [:show, :edit, :update, :destroy]
     

@@ -10,10 +10,35 @@
   </head>
 
   <body>
-  
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
-   
+    <nav>
+        <% if user_signed_in? %>
+            <p>Olá <%= current_user.email%>
+               <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+            </p>
+            <%= link_to 'Fabricantes', manufacturers_path %>
+            <% if current_user.admin? %>
+                <%= link_to 'Filiais', subsidiaries_path %>
+                <%= link_to 'Categorias de carro', car_categories_path %>
+                <%= link_to 'Modelos de Carro', car_models_path %>
+                <%= link_to 'Carros', cars_path %>
+                <%= link_to 'Clientes', clients_path %>
+                <%= link_to 'Agendamento de locação de carro', rentals_path%>
+            <% end %>
+
+            <% if current_user.employee?%>
+                <%= link_to 'Clientes', clients_path %>
+                <%= link_to 'Agendamento de locação de carro', rentals_path%>
+            <% end %>
+        <% else %>
+            <p><%= link_to 'Entrar', new_user_session_path %></p>
+            <%= link_to 'Fabricantes', manufacturers_path %>
+        <% end %>
+        
+    </nav>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+
     <%= yield %>
   </body>
 </html>

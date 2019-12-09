@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-feature 'User register a rental' do
+feature 'Admin creat a rental' do
     scenario 'successfully' do
-        user = User.create!(email: 'teste@teste.com.br', password:'123456789')
+        user = User.create!(email: 'teste@teste.com.br', password:'123456789', role: :admin)
         login_as(user)
-        
-        Client.create!(name: 'Fulano', cpf: '116.106.750-70', email: 'fulano@client.com')
+
+        Client.create!(name: 'Fulano', cpf: '932.054.760-26', email: 'fulano@client.com')
 
         CarCategory.create!(name: 'Carro pequeno', daily_rate: '90', 
                             car_insurance: '35', third_party_insurance: '29')
@@ -28,17 +28,4 @@ feature 'User register a rental' do
         expect(page).to have_content('Fulano')
         expect(page).to have_content('Carro pequeno')
     end
-
-    scenario 'and try create a rental without sing in' do
-        visit new_rental_path
-        
-        expect(current_path).to eq(new_user_session_path)
-    end
-
-    scenario 'and cant see a rental option without sing in' do
-        visit root_path
-        
-        expect(page).not_to have_content('Agendamento de locação de carro')
-    end
 end
-    

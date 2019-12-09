@@ -1,8 +1,8 @@
 <div>
-    <% if @car.errors.any? %>
+    <% if car.errors.any? %>
         <p>Você deve corrigir os seguintes erros:</p>
         <ul>
-            <% @car.errors.full_messages.each do |message| %>
+            <% car.errors.full_messages.each do |message| %>
                 <li><%= message %></li>
             <% end %>
         </ul>
@@ -10,7 +10,7 @@
 </div>
 
 <div>
-    <%= form_with model: @car, local: true do |form| %>
+    <%= form_with model: car, local: true do |form| %>
         <p>
             <%= form.label :license_plate, 'Placa' %>
             <%= form.text_field :license_plate %>
@@ -25,11 +25,11 @@
         </p>
         <p>
             <%= form.label :subsidiary_id, 'Filial' %>
-            <%= form.collection_select :subsidiary_id, @subsidiaries, :id, :name %>
+            <%= form.collection_select :subsidiary_id, subsidiaries, :id, :name %>
         </p>
         <p>
             <%= form.label :car_model_id, 'Modelo' %>
-            <%= form.collection_select :car_model_id, @car_models, :id, :name %>
+            <%= form.collection_select :car_model_id, car_models, :id, :name %>
         </p>
         <p>
             <%= form.submit 'Enviar' %>

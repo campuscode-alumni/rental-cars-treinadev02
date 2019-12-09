@@ -20,6 +20,6 @@ feature 'Admin delete a manufacturer' do
 
         visit manufacturer_path(manufacturer)
 
-        expect(current_path).to eq(new_user_session_path)
+        expect(current_path).not_to have_content('Remover')
     end
 end
