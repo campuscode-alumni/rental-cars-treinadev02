@@ -11,7 +11,7 @@ feature 'User register a rental' do
                             car_insurance: '35', third_party_insurance: '29')
         
         visit root_path
-        click_on 'Agendamento de locação de carro'
+        click_on 'Locação'
         click_on 'Agendar locação'
 
         fill_in 'Data Inicial', with: '2019/01/01'
@@ -42,12 +42,55 @@ feature 'User register a rental' do
     end
 
     
-    xscenario 'must fill all fields' do
+    scenario 'must fill all fields' do
+        user = create(:user, role: :employee)
+        login_as(user)
+        
+        visit new_rental_path
 
+        click_on 'Enviar'
+
+        expect(page).to have_content('O campo deve ser preenchido')
     end
 
-    xscenario 'and start date must be less or equal to end date' do
-    
+    scenario 'and start date must be less or equal to end date' do
+        user = create(:user, role: :employee)
+        login_as(user)
+        
+        client = create(:client)
+
+        car_category = create(:car_category)
+        
+        visit new_rental_path
+
+        fill_in 'Data Inicial', with: '2019/01/07'
+        fill_in 'Data Final', with: '2019/01/01'
+        select "#{client.name} - #{client.cpf}" , from: 'Cliente'
+        select car_category.name , from: 'Categoria'
+
+        click_on 'Enviar'
+
+        expect(page).to have_content('deve ser maior que a data de inicio')
+    end
+
+    scenario 'and start date must be bigger or equal to today' do
+        user = create(:user, role: :employee)
+        login_as(user)
+        
+        client = create(:client)
+
+        car_category = create(:car_category)
+        
+        visit new_rental_path
+
+        fill_in 'Data Inicial', with: DateTime.now.prev_day
+        fill_in 'Data Final', with: DateTime.now.next_day
+        select "#{client.name} - #{client.cpf}" , from: 'Cliente'
+        select car_category.name , from: 'Categoria'
+
+        click_on 'Enviar'
+
+        expect(page).to have_content('Data de inicio deve ser maior ou igual a data atual')
     end
 
 

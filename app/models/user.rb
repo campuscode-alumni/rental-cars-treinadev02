@@ -7,4 +7,12 @@ class User < ApplicationRecord
   enum role: [:employee, :admin]
 
   belongs_to :subsidiary
+
+  def show_role
+    if employee?
+      "Empregado"
+    else
+      "Administrador" 
+    end
+  end
 end

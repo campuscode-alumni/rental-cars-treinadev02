@@ -1,26 +1,29 @@
-<h1> Agendamento de carros </h1>
+<div >
+            <p><h1> Agendamento de carros </h1>
+            <%= form_with url: search_rentals_path, local: true, method: :get do %>
+                <%= label_tag :q, 'Codigo' %>
+                <%= text_field_tag :q %>
+                <%= submit_tag 'Busca'%>
+            <% end %></ p>
 
+</div>
 <%= link_to 'Agendar locação', new_rental_path %>
 
-<% if @rentals.empty? %>
-    <p>Não possui agendamentos cadastrados.</p>
-<% end %> 
-
 <div>
-    <%= form_with url: rental_search_path, local: true, method: :get do %>
-        <%= label_tag :q, 'Codigo' %>
-        <%= text_field_tag :q %>
-    <% end %>
+    <% if @rentals.empty? %>
+        <p>Não possui agendamentos cadastrados.</p>
+    <% end %> 
 </div>
-
 
 <ul>
     <% @rentals.each do |rental| %>
         <li>
-            <%= link_to rental.client.name, rental_path(rental) %>
+            <%= link_to rental.reservation_code, rental_path(rental)%>
+            <%= rental.client.description %>
             <%= rental.car_category.name %>
             <%= rental.start_date %>
-            <%= rental.end_date %>
+            <%= rental.end_date %>           
+            <%= rental.show_status%>
         </li>
     <% end %>
 </ul>

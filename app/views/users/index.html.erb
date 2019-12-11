@@ -1,0 +1,18 @@
+<h1>Cadastro de Usuários</h1>
+
+<%= link_to 'Cadastra usuário', new_user_path %>
+
+<% if @users.empty? %>
+    <p>Não possui usuários cadastrados.</p>
+<% end %> 
+
+
+<ul>
+    <% @users.each do |user| %>
+        <li>
+            <%= link_to user.email, user %>
+            <%= user.subsidiary.name %>
+            <%= user.show_role %>
+        </li>
+    <% end %>
+</ul>

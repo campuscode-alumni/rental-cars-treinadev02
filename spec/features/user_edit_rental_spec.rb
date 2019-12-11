@@ -15,12 +15,12 @@ feature 'user register a rental' do
         CarCategory.create!(name: 'Carro grande', daily_rate: '120', 
                             car_insurance: '35', third_party_insurance: '29')
         
-        Rental.create!(start_date: '2019-12-01', end_date: '2019-12-07', 
-                       client_id:client.id, car_category_id:car_category.id)
+        rental = Rental.create!(start_date: '2019-12-01', end_date: '2019-12-07', 
+                       client_id:client.id, car_category_id:car_category.id, reservation_code: 123456)
 
         visit root_path
-        click_on 'Agendamento de locação de carro'
-        click_on 'Fulano'
+        click_on 'Locação'
+        click_on '123456'
         click_on 'Editar'
 
         fill_in 'Data Inicial', with: '2019/01/01'
@@ -53,11 +53,11 @@ feature 'user register a rental' do
                             car_insurance: '35', third_party_insurance: '29')
         
         Rental.create!(start_date: '2019-12-01', end_date: '2019-12-07', 
-                       client_id:client.id, car_category_id:car_category.id)
+                       client_id:client.id, car_category_id:car_category.id, reservation_code: '123456')
 
         visit root_path
-        click_on 'Agendamento de locação de carro'
-        click_on 'Fulano'
+        click_on 'Locação'
+        click_on '123456'
         click_on 'Editar'
 
         fill_in 'Data Inicial', with: '2019/01/01'
@@ -87,7 +87,7 @@ feature 'user register a rental' do
                             car_insurance: '35', third_party_insurance: '29')
         
         rental = Rental.create!(start_date: '2019-12-01', end_date: '2019-12-07', 
-                       client_id:client.id, car_category_id:car_category.id)
+                       client_id:client.id, car_category_id:car_category.id, reservation_code: '123456')
         
         visit edit_rental_path(rental)
         

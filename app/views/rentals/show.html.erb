@@ -1,8 +1,17 @@
-<h1><%= @rental.client.description%></h1>
+<h1><%= @rental.reservation_code %></h1>
 
-<h2><%= @rental.car_category.name %></h2>
+
+<h3><%= @rental.client.description%></h3>
+<h3><%= @rental.car_category.name %></h3>
 <h3>Inicio: <%= @rental.start_date.strftime("%d/%m/%Y")%> </h3>
 <h3>Final:  <%= @rental.end_date.strftime("%d/%m/%Y") %> </h3>
+<h3><%= @rental.show_status %> </h3>
+
+<% if @rental.scheduled? %>
+    <%= link_to 'Efetiva Locação', atualize_rental_path, method: :post%>
+<% end %>
+
+
 
 <%= link_to 'Editar', edit_rental_path(@rental) %>
 <%= link_to 'Voltar', root_url %>

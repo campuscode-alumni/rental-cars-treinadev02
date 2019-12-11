@@ -5,6 +5,7 @@ class RentalsController < ApplicationController
 
     def index
         @rentals = Rental.all
+        @cars = Car.all
     end
 
     def new
@@ -23,6 +24,7 @@ class RentalsController < ApplicationController
 
     def create
         @rental = Rental.new(rental_params)
+        @rental.reservation_code = Time.now.usec
         if @rental.save
             flash[:notice] = 'Locação agendada com sucesso'
             redirect_to @rental            
@@ -43,6 +45,18 @@ class RentalsController < ApplicationController
             render :edit
         end
     end
+
+    def search
+          
+    end
+
+    def atualize
+        @rental = Rental.find(params[:id])
+        @rental.in_progress!
+        @rental.save
+
+        redirect_to @rental
+    end
     
     private 
 
@@ -53,5 +67,4 @@ class RentalsController < ApplicationController
     def find_rental
         @rental = Rental.find(params[:id])
     end
-
 end

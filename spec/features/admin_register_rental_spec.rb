@@ -11,7 +11,7 @@ feature 'Admin creat a rental' do
                             car_insurance: '35', third_party_insurance: '29')
         
         visit root_path
-        click_on 'Agendamento de locação de carro'
+        click_on 'Locação'
         click_on 'Agendar locação'
 
         fill_in 'Data Inicial', with: '2019/01/01'
