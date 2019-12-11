@@ -9,4 +9,12 @@
 <h3>Categoria</h3>
 <p><%= @rental.car_category.name %></p>
 
-<%= link_to 'Iniciar Locação', start_rental_path(@rental) %>
+<% if @rental.scheduled? %>
+  <%= form_with model: @rental, url: start_rental_path, method: :post do |f| %>
+    <%= f.label :car_id, 'Carro' %>
+    <%= f.collection_select :car_id, @cars, :id, :name %>
+    <%= f.submit 'Iniciar Locação' %>
+  <% end %>
+<% elsif @rental.in_progress? %>
+  <%= @rental.car.name %>
+<% end %>

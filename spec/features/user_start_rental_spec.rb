@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'user start rental' do
-  xscenario 'successfully' do
+  scenario 'successfully' do
     subsidiary = Subsidiary.create!(name: 'Almeidinha Cars',
                                     cnpj: '00.000.000/0000-00',
                                     address: 'Alameda Santos, 1293')
@@ -24,11 +24,13 @@ feature 'user start rental' do
 
     login_as(user, scope: :user)
     visit rental_path(rental)
+    select "#{car_model.name} - #{car.license_plate}", from: 'Carro'
     click_on 'Iniciar Locação'
 
     expect(page).to have_content('Locação iniciada com sucesso')
-    expect(page).to have_link('Iniciar Locação')
+    expect(page).not_to have_button('Iniciar Locação')
     rental.reload
+    car.reload
     expect(rental).to be_in_progress
     expect(car).not_to be_available
   end

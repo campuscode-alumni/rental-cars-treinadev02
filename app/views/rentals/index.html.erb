@@ -5,3 +5,8 @@
   <%= text_field_tag :q %>
   <%= submit_tag 'Buscar' %>
 <% end %>
+
+<%#= render partial: 'rental', collection: @rentals %>
+<% if @rentals.present? %>
+  <%= render @rentals %>
+<% end %>
