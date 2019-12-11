@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   resources :cars, only: [:index, :show, :create, :new, :edit, :update]
   resources :rentals , only: [:index, :show, :create, :new, :edit, :update] do
     get 'search', on: :collection
-    post 'atualize', on: :member
+    post 'start', on: :member
   end
 end

@@ -3,6 +3,9 @@ class Rental < ApplicationRecord
   belongs_to :car_category
   belongs_to :car, optional: true
 
+  has_one :car_rental
+  has_one :car, through: :car_rental
+
   validates :start_date, :end_date, presence: {message: 'O campo deve ser preenchido'}
   validate :end_date_must_be_greater_than_star_date
   validate :start_date_must_be_greater_than_or_equal_today
@@ -32,8 +35,8 @@ class Rental < ApplicationRecord
     if !start_date.presence || !end_date.presence
       return
     else
-      time = Time.now.to_date
-      unless start_date >= time
+
+      unless start_date >= Date.current
           errors.add(:start_date, 'deve ser maior ou igual a data atual')  
       end
     end

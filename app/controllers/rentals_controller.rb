@@ -20,11 +20,12 @@ class RentalsController < ApplicationController
     end
 
     def show
+        @cars = @rental.car_categories.cars
     end
 
     def create
         @rental = Rental.new(rental_params)
-        @rental.reservation_code = Time.now.usec
+        @rental.reservation_code = SecureRandom.hex(5)
         if @rental.save
             flash[:notice] = 'Locação agendada com sucesso'
             redirect_to @rental            
@@ -47,13 +48,21 @@ class RentalsController < ApplicationController
     end
 
     def search
-          
+         @rentals = Rental.where('reservation_code like ?', "%#{params[:q]}%") 
+
+         render :index
     end
 
-    def atualize
+    def start
         @rental = Rental.find(params[:id])
         @rental.in_progress!
-        @rental.save
+
+        @car = Car.find(params[:rental][:car_id])
+        @car.unavailble!
+
+        rental.create_car_rental(car: @car, price: @car.car_category.price)
+
+        flash[:notice] = 'Locação iniciada com sucesso'
 
         redirect_to @rental
     end
