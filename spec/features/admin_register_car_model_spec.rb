@@ -8,7 +8,10 @@ feature 'Admin register car model' do
                         third_party_insurance: 90)
     CarCategory.create!(name: 'B', daily_rate: 200, car_insurance: 150,
                         third_party_insurance: 190)
+    admin = User.create!(email: 'test@test.com', password: '123456',
+                         role: :admin)
 
+    login_as(admin, scope: :user)
     visit root_path
     click_on 'Modelos de Carro'
     click_on 'Registrar novo modelo'
@@ -32,7 +35,10 @@ feature 'Admin register car model' do
     Manufacturer.create!(name: 'Chevrolet')
     CarCategory.create!(name: 'A', daily_rate: 100, car_insurance: 50,
                         third_party_insurance: 90)
+    admin = User.create!(email: 'test@test.com', password: '123456',
+                         role: :admin)
 
+    login_as(admin, scope: :user)
     visit root_path
     click_on 'Modelos de Carro'
     click_on 'Registrar novo modelo'
@@ -42,4 +48,15 @@ feature 'Admin register car model' do
     expect(page).to have_content('Erro')
   end
 
+  scenario 'and must be admin' do
+    user = User.create!(email: 'test@test.com', password: '123456',
+                        role: :employee)
+
+    login_as(user, scope: :user)
+    visit new_car_model_path
+
+    expect(page).to have_content('Você não tem autorização para realizar '\
+                                 'esta ação')
+    expect(current_path).to eq root_path
+  end
 end

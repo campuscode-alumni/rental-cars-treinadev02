@@ -1,3 +1,12 @@
+<% if @rental.errors.any? %>
+  <p>Você deve corrigir os seguintes erros para continuar</p>
+  <ul>
+  <% @rental.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+  </ul>
+<% end %>
+
 <%= form_with model: @rental, local: true do |f| %>
   <%= f.label :start_date, 'Data de início' %>
   <%= f.date_field :start_date %>

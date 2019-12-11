@@ -47,15 +47,37 @@ feature 'Admin view subsidiaries' do
                                  ' no sistema.')
   end
 
-  xscenario 'and must be logged in' do
+  scenario 'and must be logged in' do
     visit subsidiaries_path
 
     expect(current_path).to eq new_user_session_path
   end
 
-  xscenario 'and must be logged in' do
+  scenario 'and must be logged in' do
     visit root_path
 
     expect(page).not_to have_link('Filiais')
+  end
+
+  scenario 'and must be admin' do
+    admin = User.create!(email: 'test@test.com', password: '123456',
+                         role: :employee)
+
+    login_as(admin, scope: :user)
+    visit root_path
+
+    expect(page).not_to have_link('Filiais')
+  end
+
+  scenario 'and must be admin' do
+    admin = User.create!(email: 'test@test.com', password: '123456',
+                         role: :employee)
+
+    login_as(admin, scope: :user)
+    visit subsidiaries_path
+
+    expect(page).to have_content('Você não tem autorização para realizar '\
+                                 'esta ação')
+    expect(current_path).to eq root_path
   end
 end

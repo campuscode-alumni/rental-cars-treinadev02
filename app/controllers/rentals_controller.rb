@@ -16,7 +16,12 @@ class RentalsController < ApplicationController
     @rental = Rental.new(params.require(:rental).permit(:start_date, :end_date,
                                                         :client_id,
                                                         :car_category_id))
-    @rental.save
-    redirect_to @rental, notice: 'Locação agendada com sucesso'
+    if @rental.save
+      redirect_to @rental, notice: 'Locação agendada com sucesso'
+    else
+      @clients = Client.all
+      @car_categories = CarCategory.all
+      render :new
+    end
   end
 end
