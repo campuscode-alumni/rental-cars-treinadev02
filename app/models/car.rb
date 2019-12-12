@@ -2,6 +2,8 @@ class Car < ApplicationRecord
   belongs_to :car_model
   belongs_to :subsidiary
 
+  has_one :car_category, through: :car_model
+
   has_many :car_rentals
   has_many :rentals, through: :car_rentals
 
@@ -12,5 +14,6 @@ class Car < ApplicationRecord
   enum status: { availble: 0, unavailble: 5}
 
   def name
-    "#{car_model.car_category} - #{license_plate}"
+    "#{car_model.name} - #{license_plate}"
+  end
 end

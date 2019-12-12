@@ -20,12 +20,12 @@ class RentalsController < ApplicationController
     end
 
     def show
-        @cars = @rental.car_categories.cars
+        @cars = @rental.car_category.cars.availble
     end
 
     def create
         @rental = Rental.new(rental_params)
-        @rental.reservation_code = SecureRandom.hex(5)
+        @rental.reservation_code = SecureRandom.hex(5).upcase
         if @rental.save
             flash[:notice] = 'Locação agendada com sucesso'
             redirect_to @rental            
@@ -60,7 +60,7 @@ class RentalsController < ApplicationController
         @car = Car.find(params[:rental][:car_id])
         @car.unavailble!
 
-        rental.create_car_rental(car: @car, price: @car.car_category.price)
+        @rental.create_car_rental(car: @car, price: @car.car_category.price)
 
         flash[:notice] = 'Locação iniciada com sucesso'
 

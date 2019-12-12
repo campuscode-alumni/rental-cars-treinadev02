@@ -17,7 +17,6 @@
             </p>
             <%= link_to 'Fabricantes', manufacturers_path %>
             <% if current_user.admin? %>
-                <%= link_to 'Usuários', users_path %>
                 <%= link_to 'Filiais', subsidiaries_path %>
                 <%= link_to 'Categorias de carro', car_categories_path %>
                 <%= link_to 'Modelos de Carro', car_models_path %>

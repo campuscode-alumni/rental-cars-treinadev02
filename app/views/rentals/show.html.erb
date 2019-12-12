@@ -8,14 +8,16 @@
 <h3><%= @rental.show_status %> </h3>
 
 <% if @rental.scheduled? %>
-    <%= forn_with model: @rental, url: start_rental_path, method: :post do |f|%>
+    <%= form_with model: @rental, url: start_rental_path, method: :post do |f|%>
         <%= f.label :car_id, 'Carro'%>
         <%= f.collection_select :car_id, @cars, :id, :name %>
-        <%= f.submit 'Efetiva Locação'%>
+        <%= f.submit 'Iniciar Locação'%>
     <% end %>
 <% elsif @rental.in_progress? %>
-    @rental.car.license_plate
-<% end %>
+    <h3>Carro Alugado: <%= @rental.car.name%> </h3>
+<%else%>
+<%end%>
+
 
 
 

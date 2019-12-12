@@ -1,7 +1,6 @@
 class Rental < ApplicationRecord
   belongs_to :client
   belongs_to :car_category
-  belongs_to :car, optional: true
 
   has_one :car_rental
   has_one :car, through: :car_rental
@@ -10,7 +9,7 @@ class Rental < ApplicationRecord
   validate :end_date_must_be_greater_than_star_date
   validate :start_date_must_be_greater_than_or_equal_today
 
-  enum status: [:scheduled, :in_progress]
+  enum status: {scheduled: 0 , in_progress: 1}
 
   def show_status
     if scheduled?
@@ -21,25 +20,18 @@ class Rental < ApplicationRecord
   end
 
   def end_date_must_be_greater_than_star_date
+      return unless start_date.presence || end_date.presence
       
-      if !start_date.presence || !end_date.presence
-        errors.add(:base, "As datas devem ser preenchidas")
-      else
-        if end_date < start_date
-          errors.add(:end_date, 'deve ser maior que a data de inicio')  
-        end
+      if end_date < start_date
+        errors.add(:end_date, 'deve ser maior que a data de inicio')  
       end
   end
 
   def start_date_must_be_greater_than_or_equal_today
-    if !start_date.presence || !end_date.presence
-      return
-    else
-
-      unless start_date >= Date.current
+    return unless !start_date.presence || !end_date.presence
+      if start_date >= Date.current
           errors.add(:start_date, 'deve ser maior ou igual a data atual')  
       end
-    end
   end
 
   #def calculate_reservation_code
