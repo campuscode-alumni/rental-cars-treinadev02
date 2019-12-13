@@ -1,0 +1,17 @@
+<h1>Lista de Carros</h1>
+
+<%= link_to 'Registra carro', new_car_path %>
+
+<ul>
+    <% @cars.each do |car|%>
+        <li>
+            <%= link_to car.license_plate, car_path(car) %>
+            <%= car.color %>
+            <%= car.mileage %>
+            <%= car.subsidiary.name %>
+            <%= car.car_model.name %>
+            <%= car.show_status %>
+        </li>
+    <% end %>
+</ul>
+

@@ -1,0 +1,7 @@
+<h1> <%= @manufacturer.name %> </h1>
+
+<% if !current_user.nil? && current_user.admin? %>
+    <%= link_to 'Editar', edit_manufacturer_path(@manufacturer) %>
+    <%= link_to 'Remover', @manufacturer , method: :delete, data: {confirm: "Deseja remover o fabricante: #{@manufacturer.name} ?"} %>
+<% end %>
+<%= link_to 'Voltar', root_url %>

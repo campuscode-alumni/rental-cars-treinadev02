@@ -1,0 +1,25 @@
+<h1><%= @rental.reservation_code %></h1>
+
+
+<h3><%= @rental.client.description%></h3>
+<h3><%= @rental.car_category.name %></h3>
+<h3>Inicio: <%= @rental.start_date.strftime("%d/%m/%Y")%> </h3>
+<h3>Final:  <%= @rental.end_date.strftime("%d/%m/%Y") %> </h3>
+<h3><%= @rental.show_status %> </h3>
+
+<% if @rental.scheduled? %>
+    <%= form_with model: @rental, url: start_rental_path, method: :post do |f|%>
+        <%= f.label :car_id, 'Carro'%>
+        <%= f.collection_select :car_id, @cars, :id, :name %>
+        <%= f.submit 'Iniciar Locação'%>
+    <% end %>
+<% elsif @rental.in_progress? %>
+    <h3>Carro Alugado: <%= @rental.car.name%> </h3>
+<%else%>
+<%end%>
+
+
+
+
+<%= link_to 'Editar', edit_rental_path(@rental) %>
+<%= link_to 'Voltar', root_url %>
