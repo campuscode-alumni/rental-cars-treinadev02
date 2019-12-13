@@ -21,6 +21,7 @@ class RentalsController < ApplicationController
 
     def show
         @cars = @rental.car_category.cars.availble
+        #@cars = @rental.car_category.cars.where('subsidiary_id = :subsidiary_id and status = :status', { subsidiary_id: current_user.subsidiary_id, status: :availble} )
     end
 
     def create

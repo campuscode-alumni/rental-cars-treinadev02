@@ -16,4 +16,12 @@ class Car < ApplicationRecord
   def name
     "#{car_model.name} - #{license_plate}"
   end
+
+  def show_status
+    if availble?
+      'Disponivel'
+    else 
+      'Indisponivel'
+    end
+  end
 end
