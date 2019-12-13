@@ -1,6 +1,7 @@
 class Rental < ApplicationRecord
   belongs_to :client
   belongs_to :car_category
+  belongs_to :subsidiary
 
   has_one :car_rental
   has_one :car, through: :car_rental
@@ -32,6 +33,19 @@ class Rental < ApplicationRecord
       if start_date >= Date.current
           errors.add(:start_date, 'deve ser maior ou igual a data atual')  
       end
+  end
+
+  def car_avalible?
+    car_models = CarModel.where(car_category: car_category)
+    total_cars = Car.where(car_model: car_models).count > 0
+
+    total_rentals = Rental.where(car_category: car_category, subsidiary: subsidiary)
+                         .where("start_date < ? and end_date > ?", start_date, start_date)
+                         .count
+
+    (total_cars - total_rentals) > 0
+
+    
   end
 
   #def calculate_reservation_code

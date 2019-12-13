@@ -27,6 +27,7 @@ class RentalsController < ApplicationController
     def create
         @rental = Rental.new(rental_params)
         @rental.reservation_code = SecureRandom.hex(5).upcase
+        @rental.subsidiary_id = current_user.subsidiary
         if @rental.save
             flash[:notice] = 'Locação agendada com sucesso'
             redirect_to @rental            

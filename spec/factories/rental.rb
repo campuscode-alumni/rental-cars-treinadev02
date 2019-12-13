@@ -10,5 +10,8 @@ FactoryBot.define do
                                             car_insurance: '35',
                                             third_party_insurance: '29').id}
         reservation_code {'AAA1111'}
+        subsidiary_id { Subsidiary.create( name:'Unidade SP', 
+                                           cnpj: '000.000.000-00', 
+                                           address: 'Av. teste')}
     end
   end
